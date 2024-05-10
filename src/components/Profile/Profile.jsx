@@ -9,7 +9,7 @@ const Profile = () => {
       <dialog id="profile" className="modal">
         <div className="modal-box max-w-2xl">
           <div className="flex justify-between">
-            <h3 className="font-bold text-lg">Profile</h3>
+            <h3 className="font-bold text-lg">{mode ? 'Update Profile' : 'Profile'}</h3>
             <div className="flex gap-2">
               <button
                 onClick={() => setMode(!mode)}
@@ -28,7 +28,7 @@ const Profile = () => {
               </form>
             </div>
           </div>
-          <div className="flex flex-col items-center">
+          <div className={`flex flex-col items-center ${mode ? '' : 'pb-10'}`}>
             <div>
               <div className="w-52 h-52 border-2 border-neutral rounded-full mx-auto">
                 <img src={profile} alt="" />
@@ -56,7 +56,7 @@ const Profile = () => {
                     placeholder="photoUrl"
                     required
                   />
-                  <button className="btn text-neutral w-1/2 mx-auto mt-3">
+                  <button className="btn btn-info text-neutral w-1/2 mx-auto mt-3">
                     <FiEdit /> Update
                   </button>
                 </form>

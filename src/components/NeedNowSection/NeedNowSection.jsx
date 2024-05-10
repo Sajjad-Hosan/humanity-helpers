@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import VolunteerCard from "../VolunteerCard/VolunteerCard";
 
 const NeedNowSection = () => {
@@ -12,7 +13,7 @@ const NeedNowSection = () => {
                 <VolunteerCard/>
                 <VolunteerCard/>
             </div>
-            <button className="btn btn-neutral px-10 w-1/2 mx-auto">See All</button>
+            <Link to='/need_volunteer_page' className="btn btn-neutral px-10 w-1/2 mx-auto">See All</Link>
         </div>
     );
 };

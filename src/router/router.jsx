@@ -4,6 +4,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import NeedVolunteerPage from "../pages/NeedVolunteerPage/NeedVolunteerPage";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,13 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/need_volunteer_page",
+        element: <NeedVolunteerPage />,
+      },
+      {
+        path: "/my_posts",
       },
       {
         path: "/login",
