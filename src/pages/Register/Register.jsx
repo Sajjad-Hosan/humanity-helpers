@@ -1,11 +1,13 @@
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa6";
 import register from "../../assets/authentication/signup.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AttentionSeeker, Slide, Zoom } from "react-awesome-reveal";
 import useAuth from "../../hooks/useAuth/useAuth";
 import { updateProfile } from "firebase/auth";
+import toast from "react-hot-toast";
 const Register = () => {
   const { handleGithub, handleGoogle, handleCreateUser } = useAuth();
+  const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -14,10 +16,16 @@ const Register = () => {
     const password = form.password.value;
     const photoUrl = form.photoUrl.value;
     //
-    handleCreateUser(email, password).then((user) => {
-      console.lof(user);
-      // updateProfile()
-    });
+    handleCreateUser(email, password)
+      .then((result) => {
+        updateProfile(result.user, {
+          displayName: name,
+          photoURL: photoUrl,
+        });
+        toast.success("Register Successfully!");
+        navigate("/");
+      })
+      .catch((e) => toast.error(e.message));
   };
   return (
     <div className="max-w-6xl mx-auto mt-5">

@@ -1,14 +1,46 @@
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa6";
 import login from "../../assets/authentication/login.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AttentionSeeker, Slide, Zoom } from "react-awesome-reveal";
+import useAuth from "../../hooks/useAuth/useAuth";
+import toast from "react-hot-toast";
 const Login = () => {
+  const { handleGithub, handleGoogle, handleUsedUser } = useAuth();
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    //
+    handleUsedUser(email, password)
+      .then(() => {
+        toast.success("Login Successfully!");
+        navigate(state || "/");
+      })
+      .catch((e) => toast.error(e.message));
+  };
+  const handleGooglePop = () => {
+    handleGoogle()
+      .then(() => {
+        toast.success("Login with Google Successfully!");
+      })
+      .catch((e) => console.log(e.message));
+  };
+  const handleGithubPop = () => {
+    handleGithub()
+      .then(() => {
+        toast.success("Login with Github Successfully!");
+      })
+      .catch((e) => toast.error(e.message));
+  };
   return (
     <div className="max-w-6xl mx-auto mt-5">
       <div className="flex flex-col-reverse md:flex-row gap-7 items-center bg-base-100 md:shadow md:shadow-gray-500 py-10 md:h-[550px] rounded-xl">
         <Slide>
           <div className="w-full md:flex-1">
-            <form className="max-w-sm mx-auto">
+            <form onSubmit={handleLogin} className="max-w-sm mx-auto">
               <h1 className="text-4xl mb-5">Login</h1>
               <div className="mb-5">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -52,10 +84,16 @@ const Login = () => {
               </button>
             </form>
             <div className="flex gap-4 px-3 md:px-16 mt-8">
-              <button className="btn btn-outline px-8 hover:text-green-500">
+              <button
+                onClick={handleGooglePop}
+                className="btn btn-outline px-8 hover:text-green-500"
+              >
                 <FaGoogle /> Google
               </button>
-              <button className="btn btn-neutral px-8 hover:text-white">
+              <button
+                onClick={handleGithubPop}
+                className="btn btn-neutral px-8 hover:text-white"
+              >
                 <FaGithub /> Github
               </button>
               <button className="btn btn-outline px-8 hover:text-info">

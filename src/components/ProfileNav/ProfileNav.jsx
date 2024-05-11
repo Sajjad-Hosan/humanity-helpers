@@ -1,11 +1,21 @@
+import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth/useAuth";
 import Profile from "../Profile/Profile";
 
 const ProfileNav = () => {
+  const { user, handleSignOut } = useAuth();
+  const handleLogout = () => {
+    handleSignOut()
+      .then(() => {
+        toast.success("Logout Successfully!");
+      })
+      .catch((e) => toast.error(e.message));
+  };
   return (
     <>
       <div className="dropdown dropdown-end">
         <div className="absolute overflow-hidden">
-    <Profile/>
+          <Profile />
         </div>
         <div
           tabIndex={0}
@@ -14,8 +24,9 @@ const ProfileNav = () => {
         >
           <div className="w-10 rounded-full">
             <img
+              className="h-full w-full object-cover"
               alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+              src={user?.photoURL}
             />
           </div>
         </div>
@@ -34,7 +45,7 @@ const ProfileNav = () => {
             <button>Settings</button>
           </li>
           <li>
-            <button>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
           </li>
         </ul>
       </div>
