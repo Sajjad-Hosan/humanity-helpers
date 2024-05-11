@@ -1,4 +1,3 @@
-import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa6";
 import register from "../../assets/authentication/signup.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { AttentionSeeker, Slide, Zoom } from "react-awesome-reveal";
@@ -125,9 +124,9 @@ const Register = () => {
                 Register new account
               </button>
             </form>
-      <div className="absolute right-5 -bottom-2">
-        <SocialDrop goo={handleGooglePop} git={handleGithubPop}  />
-      </div>
+            <div className="absolute right-5 -bottom-2">
+              <SocialDrop goo={handleGooglePop} git={handleGithubPop} />
+            </div>
           </div>
         </Slide>
         <Zoom>
