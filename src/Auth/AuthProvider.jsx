@@ -7,8 +7,8 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import app from "../services/firebase";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth/cordova";
+import app from "../services/firebase/firebase";
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
