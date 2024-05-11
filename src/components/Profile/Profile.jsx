@@ -37,7 +37,11 @@ const Profile = () => {
           <div className={`flex flex-col items-center ${mode ? "" : "pb-10"}`}>
             <div>
               <div className="w-52 h-52 border-2 border-neutral rounded-full mx-auto overflow-hidden">
-                <img className="h-full w-full object-cover" src={user?.photoURL || profile} alt="" />
+                <img
+                  className="h-full w-full object-cover"
+                  src={user?.photoURL || profile}
+                  alt=""
+                />
               </div>
               {mode ? (
                 <form className="flex flex-col gap-3 w-[500px] mt-8">
@@ -46,7 +50,7 @@ const Profile = () => {
                     name="email"
                     className="input input-bordered w-full"
                     placeholder="write your email"
-                    value={user?.email}
+                    value={user?.email || "noMail@.com"}
                     required
                   />
                   <input
@@ -72,7 +76,9 @@ const Profile = () => {
               ) : (
                 <div className="flex flex-col gap-2 mt-8">
                   <h1 className="text-2xl">Name: {user?.displayName}</h1>
-                  <h2 className="text-xl">Email: {user?.email}</h2>
+                  <h2 className="text-xl">
+                    Email: {user?.email || "noMail@.com"}
+                  </h2>
                 </div>
               )}
             </div>

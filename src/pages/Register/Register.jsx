@@ -5,6 +5,7 @@ import { AttentionSeeker, Slide, Zoom } from "react-awesome-reveal";
 import useAuth from "../../hooks/useAuth/useAuth";
 import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
+import SocialDrop from "../../components/SocialDrop/SocialDrop";
 const Register = () => {
   const { handleGithub, handleGoogle, handleCreateUser } = useAuth();
   const navigate = useNavigate();
@@ -27,11 +28,27 @@ const Register = () => {
       })
       .catch((e) => toast.error(e.message));
   };
+  const handleGooglePop = () => {
+    handleGoogle()
+      .then(() => {
+        toast.success("Login with Google Successfully!");
+        navigate("/");
+      })
+      .catch((e) => toast.error(e.message));
+  };
+  const handleGithubPop = () => {
+    handleGithub()
+      .then(() => {
+        toast.success("Login with Github Successfully!");
+        navigate("/");
+      })
+      .catch((e) => toast.error(e.message));
+  };
   return (
     <div className="max-w-6xl mx-auto mt-5">
-      <div className="flex flex-col-reverse md:flex-row-reverse gap-7 items-center bg-base-100 md:shadow md:shadow-gray-500 py-10 md:h-[550px] rounded-xl">
+      <div className="flex flex-col-reverse md:flex-row-reverse gap-7 items-center bg-base-100 md:shadow md:shadow-gray-500 py-10 md:h-[580px] rounded-xl">
         <Slide dumping={0.5}>
-          <div className="md:w-[600px]">
+          <div className="md:w-[600px] relative">
             <form onSubmit={handleRegister} className="max-w-sm mx-auto">
               <h1 className="text-4xl mb-5">Register</h1>
               <div className="mb-5">
@@ -108,18 +125,9 @@ const Register = () => {
                 Register new account
               </button>
             </form>
-
-            {/* <div className="flex gap-5 px-3 md:px-16 mt-8">
-              <button onClick={handleGoogle} className="btn btn-outline px-8 hover:text-green-500">
-                <FaGoogle /> Google
-              </button>
-              <button onClick={handleGithub} className="btn btn-outline px-8 hover:text-white">
-                <FaGithub /> Github
-              </button>
-              <button className="btn btn-neutral px-8 text-info">
-                <FaTwitter /> Twitter
-              </button>
-            </div> */}
+      <div className="absolute right-5 -bottom-2">
+        <SocialDrop goo={handleGooglePop} git={handleGithubPop}  />
+      </div>
           </div>
         </Slide>
         <Zoom>

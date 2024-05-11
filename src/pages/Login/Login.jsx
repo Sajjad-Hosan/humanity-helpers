@@ -25,13 +25,15 @@ const Login = () => {
     handleGoogle()
       .then(() => {
         toast.success("Login with Google Successfully!");
+        navigate(state || "/");
       })
-      .catch((e) => console.log(e.message));
+      .catch((e) => toast.error(e.message));
   };
   const handleGithubPop = () => {
     handleGithub()
       .then(() => {
         toast.success("Login with Github Successfully!");
+        navigate(state || "/");
       })
       .catch((e) => toast.error(e.message));
   };
