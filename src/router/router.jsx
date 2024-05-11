@@ -5,6 +5,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import NeedVolunteerPage from "../pages/NeedVolunteerPage/NeedVolunteerPage";
+import MyPosts from "../pages/MyPosts/MyPosts";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/my_posts",
+        element: <MyPosts />,
       },
       {
         path: "/login",

@@ -13,10 +13,8 @@ const ProfileNav = () => {
   };
   return (
     <>
+      <Profile />
       <div className="dropdown dropdown-end">
-        <div className="absolute overflow-hidden">
-          <Profile />
-        </div>
         <div
           tabIndex={0}
           role="button"

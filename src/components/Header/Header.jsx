@@ -57,7 +57,7 @@ const Header = () => {
       </div>
       <div className="navbar-end animate__animated animate__bounce z-10">
         <div className="dropdown mr-5 z-10">
-          <div tabIndex={0} role="button" className="btn m-1">
+          <div tabIndex={0} role="button" className="btn btn-outline px-8">
             Theme
             <svg
               width="12px"
@@ -71,7 +71,7 @@ const Header = () => {
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content z-[1] p-2 shadow-2xl bg-base-100 rounded-box w-52"
+            className="dropdown-content z-[1] p-2 shadow-2xl bg-base-100 rounded-box w-52 mt-3"
           >
             <li>
               <input
