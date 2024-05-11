@@ -1,14 +1,12 @@
-import { FaMagnifyingGlass, FaPlus } from "react-icons/fa6";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import VolunteerCard from "../../components/VolunteerCard/VolunteerCard";
 import { Helmet } from "react-helmet-async";
 import SearchBox from "../../components/SearchBox/SearchBox";
-import AddVolunteer from "../../components/AddVolunteer/AddVolunteer";
 
 const NeedVolunteerPage = () => {
   return (
     <>
     <SearchBox/>
-    <AddVolunteer/>
       <div className="flex flex-col gap-5 px-10 py-6">
         <Helmet>
           <title>Need Volunteer Page | HumanityPlatform</title>
@@ -16,12 +14,12 @@ const NeedVolunteerPage = () => {
         <div className="flex justify-between items-center">
           <h1 className="text-lg md:text-3xl">Need Volunteer</h1>
           <label className="flex gap-4">
-            <button
+            {/* <button
               onClick={() => document.getElementById("add_box").showModal()}
               className="btn btn-outline"
             >
               <FaPlus /> Add Volunteer
-            </button>
+            </button> */}
             <button
               onClick={() => document.getElementById("search_box").showModal()}
               className="btn btn-neutral text-info px-6"
