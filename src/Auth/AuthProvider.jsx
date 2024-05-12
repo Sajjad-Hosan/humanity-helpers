@@ -9,6 +9,7 @@ import {
   signOut,
   GithubAuthProvider,
   GoogleAuthProvider,
+  updateProfile,
 } from "firebase/auth";
 import app from "../services/firebase/firebase";
 
@@ -17,9 +18,17 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loader, setLoader] = useState(true);
 
   const googleAuth = new GoogleAuthProvider();
   const githubAuth = new GithubAuthProvider();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (current) => {
@@ -45,6 +54,12 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+  const handleUpdateUser = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
   const handleSignOut = () => {
     return signOut(auth);
   };
@@ -52,10 +67,12 @@ const AuthProvider = ({ children }) => {
   const contextProviders = {
     user,
     loading,
+    loader,
     handleGithub,
     handleGoogle,
     handleCreateUser,
     handleUsedUser,
+    handleUpdateUser,
     handleSignOut,
   };
   return (

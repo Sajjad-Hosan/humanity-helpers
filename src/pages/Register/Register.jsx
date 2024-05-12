@@ -16,6 +16,19 @@ const Register = () => {
     const password = form.password.value;
     const photoUrl = form.photoUrl.value;
     //
+    if (password.length < 6) {
+      toast.error("Password must be 6 character or above!");
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      toast.error("Password must have 1 Uppercase character!");
+      return;
+    }
+    if (!/[a-z]/.test(password)) {
+      toast.error("Password must have 1 Lowercase character!");
+      return;
+    }
+    //
     handleCreateUser(email, password)
       .then((result) => {
         updateProfile(result.user, {

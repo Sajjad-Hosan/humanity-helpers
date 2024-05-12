@@ -3,11 +3,28 @@ import profile from "../../assets/image/profile.svg";
 import { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth/useAuth";
-const Profile = () => {
-  const { user } = useAuth();
-  const [mode, setMode] = useState(false);
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-  console.log(user?.displayName);
+const Profile = () => {
+  const { user, handleUpdateUser } = useAuth();
+  const [mode, setMode] = useState(false);
+  const navigate = useNavigate();
+  const handleUpateProfile = (e) => {
+    e.preventDefault();
+    const from = e.target;
+    const name = from.name.value;
+    const photoUrl = from.photoUrl.value;
+
+    //
+    handleUpdateUser(name, photoUrl)
+      .then(() => {
+        toast.success("Profile Updated!");
+        navigate(-1);
+      })
+      .catch((e) => toast.error(e.message));
+  };
+
   return (
     <>
       <dialog id="profile" className="modal">
@@ -44,21 +61,16 @@ const Profile = () => {
                 />
               </div>
               {mode ? (
-                <form className="flex flex-col gap-3 w-[500px] mt-8">
+                <form
+                  onSubmit={handleUpateProfile}
+                  className="flex flex-col gap-3 w-[500px] mt-8"
+                >
                   <input
-                    type="email"
-                    name="email"
-                    className="input input-bordered w-full"
-                    placeholder="write your email"
-                    value={user?.email || "noMail@.com"}
-                    required
-                  />
-                  <input
-                    type="password"
-                    name="password"
+                    type="text"
+                    name="name"
                     className="input input-bordered w-full"
                     placeholder="write your password"
-                    value={user?.displayName}
+                    defaultValue={user?.displayName}
                     required
                   />
                   <input
@@ -66,7 +78,7 @@ const Profile = () => {
                     name="photoUrl"
                     className="input input-bordered w-full"
                     placeholder="photoUrl"
-                    value={user?.photoURL}
+                    defaultValue={user?.photoURL}
                     required
                   />
                   <button className="btn btn-info text-neutral w-1/2 mx-auto mt-3">

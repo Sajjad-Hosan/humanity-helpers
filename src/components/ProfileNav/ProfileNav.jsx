@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth/useAuth";
 import Profile from "../Profile/Profile";
-
+import person from "../../assets/image/profile.svg";
 const ProfileNav = () => {
   const { user, handleSignOut } = useAuth();
   const handleLogout = () => {
@@ -24,7 +24,7 @@ const ProfileNav = () => {
             <img
               className="h-full w-full object-cover"
               alt="Tailwind CSS Navbar component"
-              src={user?.photoURL}
+              src={user?.photoURL || person}
             />
           </div>
         </div>
