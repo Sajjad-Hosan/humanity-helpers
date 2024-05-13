@@ -13,6 +13,7 @@ import {
 } from "firebase/auth";
 import app from "../services/firebase/firebase";
 import useAxios from "../hooks/useAxios";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -72,7 +73,7 @@ const AuthProvider = ({ children }) => {
   const handleUpdatePost = (id, details) => {
     return axiosSecure.patch(``, details);
   };
-
+  //
   const contextProviders = {
     user,
     loading,

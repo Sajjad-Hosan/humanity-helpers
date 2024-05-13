@@ -5,6 +5,8 @@ import { Toaster } from "react-hot-toast";
 import "animate.css";
 import useAuth from "../../hooks/useAuth/useAuth";
 import Loading from "../../components/Loading/Loading";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Root = () => {
   const { loader } = useAuth();
@@ -19,6 +21,17 @@ const Root = () => {
     <>
       <div className="absolute">
         <Toaster position="top-right" reverseOrder={false} />
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
       <Header />
       <Outlet />

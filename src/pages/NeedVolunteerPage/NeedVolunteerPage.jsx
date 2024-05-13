@@ -1,13 +1,26 @@
-import { FaMagnifyingGlass } from "react-icons/fa6";
+import { FaMagnifyingGlass, FaPlus } from "react-icons/fa6";
 import VolunteerCard from "../../components/VolunteerCard/VolunteerCard";
 import { Helmet } from "react-helmet-async";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAxios from "../../hooks/useAxios";
 
 const NeedVolunteerPage = () => {
-  const loaderData = useLoaderData();
-  const [items, setItems] = useState(loaderData);
+  const loaderCount = useLoaderData();
+  const axiosSecure = useAxios();
+  const [count, setCount] = useState(loaderCount.count);
+  const [perPage, setPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
+  const numberOfPage = Math.ceil(count / perPage);
+  const [items, setItems] = useState([]);
+  const pages = [...Array(numberOfPage).keys()];
+
+  useEffect(() => {
+    axiosSecure
+      .post(`/volunteers?page=${currentPage}&size=${perPage}`)
+      .then((res) => setItems(res.data));
+  }, [currentPage, perPage]);
   return (
     <>
       <SearchBox />
@@ -18,12 +31,12 @@ const NeedVolunteerPage = () => {
         <div className="flex justify-between items-center">
           <h1 className="text-lg md:text-3xl">Need Volunteer</h1>
           <label className="flex gap-4">
-            {/* <button
+            <button
               onClick={() => document.getElementById("add_box").showModal()}
               className="btn btn-outline"
             >
               <FaPlus /> Add Volunteer
-            </button> */}
+            </button>
             <button
               onClick={() => document.getElementById("search_box").showModal()}
               className="btn btn-neutral text-info px-6"
@@ -33,17 +46,38 @@ const NeedVolunteerPage = () => {
           </label>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-4">
-          {
-            items.map((item,i) => <VolunteerCard key={i} item={item} />)
-          }
+          {items.map((item, i) => (
+            <VolunteerCard key={i} post={item} />
+          ))}
         </div>
         <div className="join mx-auto mt-8">
-          <button className="join-item btn btn-outline">Previous</button>
-          <button className="join-item btn btn-outline">1</button>
-          <button className="join-item btn btn-outline btn-active">2</button>
-          <button className="join-item btn btn-outline">3</button>
-          <button className="join-item btn btn-outline">4</button>
-          <button className="join-item btn btn-outline">Next</button>
+          <button
+            onClick={() =>
+              setCurrentPage(currentPage > 0 ? currentPage - 1 : currentPage)
+            }
+            className="join-item btn btn-outline"
+          >
+            Previous
+          </button>
+          {pages.map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`join-item btn btn-outline ${
+                page === currentPage ? "btn-active" : ""
+              }`}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            onClick={() =>
+              setCurrentPage(currentPage < pages.length - 1 ? currentPage + 1 : currentPage)
+            }
+            className="join-item btn btn-outline"
+          >
+            Next
+          </button>
         </div>
       </div>
     </>

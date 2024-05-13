@@ -2,8 +2,55 @@ import { FaUser } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth/useAuth";
 import ProfileNav from "../ProfileNav/ProfileNav";
-
+import logo from "/logo.png";
+import { Typewriter } from "react-simple-typewriter";
+import { useEffect, useState } from "react";
+import { setItem } from "localforage";
 const Header = () => {
+  const Themes = [
+    "light",
+    "dark",
+    "cupcake",
+    "bumblebee",
+    "emerald",
+    "corporate",
+    "synthwave",
+    "retro",
+    "valentine",
+    "halloween",
+    "garden",
+    "forest",
+    "aqua",
+    "lofi",
+    "pastel",
+    "fantasy",
+    "wireframe",
+    "black",
+    "luxury",
+    "dracula",
+    "cmyk",
+    "autumn",
+    "business",
+    "acid",
+    "lemonade",
+    "night",
+    "coffee",
+    "winter",
+    "dim",
+    "nord",
+    "sunset",
+  ];
+  const [theme, setTheme] = useState();
+  useEffect(() => {
+    const themeName = localStorage.getItem("theme");
+    setTheme(themeName);
+    document.querySelector("html").setAttribute("data-theme", theme);
+  }, [theme]);
+  const handleThemeName = (tme) => {
+    const theme = tme.target.value;
+    localStorage.setItem("theme", theme);
+    setItem(theme);
+  };
   const { user } = useAuth();
   const navLinks = (
     <>
@@ -49,7 +96,16 @@ const Header = () => {
           to="/"
           className="btn btn-ghost text-xl animate__animated animate__bounceInLeft"
         >
-          Humanity Platform
+          <img className="w-9 h-9 object-cover" src={logo} alt="" />
+          <Typewriter
+            words={["Welcome To", "Humanity Platform"]}
+            loop={5}
+            cursor
+            cursorStyle="_"
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+          />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -71,53 +127,20 @@ const Header = () => {
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content z-[1] p-2 shadow-2xl bg-base-100 rounded-box w-52 mt-3"
+            className="dropdown-content z-[1] p-2 shadow-2xl bg-base-100 rounded-box w-52 mt-3 space-x-2"
           >
-            <li>
-              <input
-                type="radio"
-                name="theme-dropdown"
-                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                aria-label="Default"
-                value="default"
-              />
-            </li>
-            <li>
-              <input
-                type="radio"
-                name="theme-dropdown"
-                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                aria-label="Retro"
-                value="retro"
-              />
-            </li>
-            <li>
-              <input
-                type="radio"
-                name="theme-dropdown"
-                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                aria-label="Cyberpunk"
-                value="cyberpunk"
-              />
-            </li>
-            <li>
-              <input
-                type="radio"
-                name="theme-dropdown"
-                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                aria-label="Valentine"
-                value="valentine"
-              />
-            </li>
-            <li>
-              <input
-                type="radio"
-                name="theme-dropdown"
-                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                aria-label="Aqua"
-                value="aqua"
-              />
-            </li>
+            {Themes.map((theme, i) => (
+              <li key={i} className="my-2">
+                <input
+                  type="radio"
+                  name="theme-dropdown"
+                  onChange={handleThemeName}
+                  className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                  aria-label={theme}
+                  value={theme}
+                />
+              </li>
+            ))}
           </ul>
         </div>
         {user ? (

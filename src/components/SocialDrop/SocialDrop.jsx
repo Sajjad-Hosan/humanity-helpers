@@ -1,10 +1,11 @@
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa6";
 import { SiHelpscout } from "react-icons/si";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 const SocialDrop = ({ goo, git }) => {
   return (
     <>
-      <details className="dropdown dropdown-left">
+      <details className="dropdown dropdown-top pr-12">
         <summary className="btn px-8 btn-outline">
           <SiHelpscout /> Helpers
         </summary>
@@ -23,7 +24,10 @@ const SocialDrop = ({ goo, git }) => {
             </button>
           </li>
           <li>
-            <button className="btn join-item btn-outline disabled">
+            <button
+              onClick={() => toast.warn("Processing")}
+              className="btn join-item btn-outline disabled"
+            >
               <FaTwitter /> Twitter
             </button>
           </li>
