@@ -2,12 +2,15 @@ import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth/useAuth";
 import Profile from "../Profile/Profile";
 import person from "../../assets/image/profile.svg";
+import { useNavigate } from "react-router-dom";
 const ProfileNav = () => {
   const { user, handleSignOut } = useAuth();
+  const navigate = useNavigate();
   const handleLogout = () => {
     handleSignOut()
       .then(() => {
         toast.success("Logout Successfully!");
+        navigate("/");
       })
       .catch((e) => toast.error(e.message));
   };

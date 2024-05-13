@@ -38,7 +38,8 @@ const router = createBrowserRouter([
         element: <VolunteerDetailsPage />,
       },
       {
-        path: "/volunteer_update_post",
+        path: "/volunteer_update_post/:id",
+        loader: ({params}) => fetch(`http://localhost:5000/user_volunteer_post/${params.id}`),
         element: <VolunteerUpdate />,
       },
       {

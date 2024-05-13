@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth/useAuth";
 import Loading from "../../components/Loading/Loading";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Root = () => {
   const { loader } = useAuth();

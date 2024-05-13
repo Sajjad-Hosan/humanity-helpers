@@ -1,7 +1,7 @@
 import TableCard from "./TableCard";
+import PropTypes from "prop-types";
 
-
-const TableContainer = () => {
+const TableContainer = ({ myLists }) => {
   return (
     <div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -25,16 +25,15 @@ const TableContainer = () => {
           </tr>
         </thead>
         <tbody>
-         <TableCard/>
-         <TableCard/>
-         <TableCard/>
-         <TableCard/>
-         <TableCard/>
-         <TableCard/>
+          {
+            myLists.map(list => <TableCard key={list._id} details={list}  />)
+          }
         </tbody>
       </table>
     </div>
   );
 };
-
+TableContainer.propTypes = {
+  myLists: PropTypes.array,
+};
 export default TableContainer;

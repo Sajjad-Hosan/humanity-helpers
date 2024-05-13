@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddVolunteer from "../../components/AddVolunteer/AddVolunteer";
 import { IoAppsSharp, IoListSharp } from "react-icons/io5";
 import { FiEdit } from "react-icons/fi";
@@ -6,9 +6,23 @@ import NoData from "../../components/NoData/NoData";
 import { FaPlus, FaTrash } from "react-icons/fa6";
 import TableContainer from "../../components/TableContainer/TableContainer";
 import CardContainer from "../../components/CardContainer/CardContainer";
+import useAxios from "../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth/useAuth";
+import toast from "react-hot-toast";
 const MyPosts = () => {
-  const [myLists, setMyLists] = useState(true);
+  const { userVolunteerData, user, setUserVolunteerData } = useAuth();
+  const axiosSecure = useAxios();
+  const [myLists, setMyLists] = useState(userVolunteerData ? true : false);
   const [tableType, setTableType] = useState(true);
+  const url = `user_volunteer_posts?email=${user?.email}`;
+  useEffect(() => {
+    axiosSecure
+      .get(url)
+      .then((res) => {
+        setUserVolunteerData(res.data);
+      })
+      .catch((e) => toast.error(e.message));
+  }, [url]);
   return (
     <>
       <AddVolunteer />
@@ -45,7 +59,7 @@ const MyPosts = () => {
         <div>
           {myLists ? (
             <div className="relative overflow-hidden mt-8">
-              {tableType ? <TableContainer /> : <CardContainer />}
+              {tableType ? <TableContainer myLists={userVolunteerData} /> : <CardContainer myLists={userVolunteerData} />}
             </div>
           ) : (
             <NoData />

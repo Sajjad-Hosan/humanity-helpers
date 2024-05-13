@@ -13,12 +13,13 @@ import {
 } from "firebase/auth";
 import app from "../services/firebase/firebase";
 import useAxios from "../hooks/useAxios";
-import toast from "react-hot-toast";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
+  const [userVolunteerData, setUserVolunteerData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loader, setLoader] = useState(true);
   const axiosSecure = useAxios();
@@ -37,6 +38,24 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (current) => {
       setUser(current);
       setLoading(false);
+      //
+      const curEmail = current?.email;
+      const currentEmail = { email: curEmail };
+      if (current) {
+        axios
+          .post("http://localhost:5000/jwt", currentEmail, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
+      } else {
+        axios.post("http://localhost:5000/logout", currentEmail, {
+          withCredentials: true,
+        }).then((res) => {
+          console.log(res.data)
+        })
+      }
     });
     return () => unSubscribe();
   }, [auth]);
@@ -78,6 +97,8 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     loader,
+    userVolunteerData,
+    setUserVolunteerData,
     handleGithub,
     handleGoogle,
     handleCreateUser,
