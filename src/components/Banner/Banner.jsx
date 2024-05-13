@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
@@ -8,7 +9,8 @@ import "../../styles.css";
 import { Autoplay, Mousewheel } from "swiper/modules";
 import Slider from "../Slider/Slider";
 
-const Banner = () => {
+const Banner = ({ loaderDatas }) => {
+  const [sliders, setSliders] = useState(loaderDatas.slice(0, 6));
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -29,15 +31,11 @@ const Banner = () => {
         onAutoplayTimeLeft={onAutoplayTimeLeft}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <Slider />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slider />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slider />
-        </SwiperSlide>
+        {sliders.map((slide) => (
+          <SwiperSlide key={slide._id}>
+            <Slider slider={slide} />
+          </SwiperSlide>
+        ))}
 
         <div className="autoplay-progress" slot="container-end">
           <svg viewBox="0 0 48 48" ref={progressCircle}>
@@ -48,5 +46,8 @@ const Banner = () => {
       </Swiper>
     </div>
   );
+};
+Banner.propTypes = {
+  loaderDatas: PropTypes.array,
 };
 export default Banner;

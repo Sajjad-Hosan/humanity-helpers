@@ -13,7 +13,11 @@ const MyPosts = () => {
   const { userVolunteerData, user, setUserVolunteerData } = useAuth();
   const axiosSecure = useAxios();
   const [myLists, setMyLists] = useState(userVolunteerData ? true : false);
-  const [tableType, setTableType] = useState(true);
+  const [tableType, setTableType] = useState();
+  useEffect(() => {
+    const type = JSON.parse(localStorage.getItem("tableType"));
+    setTableType(type);
+  }, []);
   const url = `user_volunteer_posts?email=${user?.email}`;
   useEffect(() => {
     axiosSecure
@@ -23,6 +27,10 @@ const MyPosts = () => {
       })
       .catch((e) => toast.error(e.message));
   }, [url]);
+  const handleTableType = (boo) => {
+    setTableType(boo);
+    localStorage.setItem("tableType", boo);
+  };
   return (
     <>
       <AddVolunteer />
@@ -31,13 +39,15 @@ const MyPosts = () => {
           <h1 className="text-lg md:text-3xl">My Volunteer Posts</h1>
           <div className="flex items-center gap-5">
             <button
-              onClick={() => document.getElementById("add_box").showModal()}
+              onClickCapture={() =>
+                document.getElementById("add_box").showModal()
+              }
               className="btn btn-outline"
             >
               <FaPlus /> Add Volunteer
             </button>
             <button
-              onClick={() => setTableType(false)}
+              onClickCapture={() => handleTableType(false)}
               className={`btn btn-outline px-4 tooltip flex ${
                 tableType ? "" : "btn-active"
               }`}
@@ -46,7 +56,7 @@ const MyPosts = () => {
               <IoAppsSharp />
             </button>
             <button
-              onClick={() => setTableType(true)}
+              onClick={() => handleTableType(true)}
               className={`btn btn-outline px-4 tooltip flex ${
                 tableType ? "btn-active" : ""
               }`}
@@ -59,7 +69,11 @@ const MyPosts = () => {
         <div>
           {myLists ? (
             <div className="relative overflow-hidden mt-8">
-              {tableType ? <TableContainer myLists={userVolunteerData} /> : <CardContainer myLists={userVolunteerData} />}
+              {tableType ? (
+                <TableContainer myLists={userVolunteerData} />
+              ) : (
+                <CardContainer myLists={userVolunteerData} />
+              )}
             </div>
           ) : (
             <NoData />

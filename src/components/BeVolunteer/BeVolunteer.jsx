@@ -1,10 +1,25 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaXmark } from "react-icons/fa6";
+import PropTypes from "prop-types";
+import useAuth from "../../hooks/useAuth/useAuth";
 
-const BeVolunteer = () => {
+const BeVolunteer = ({ data }) => {
+  const {user} = useAuth()
   const [show, setShow] = useState(false);
   const [no, setNo] = useState(0);
+  const {
+    _id,
+    thumbnail,
+    category,
+    dateline,
+    description,
+    location,
+    organizerEmail,
+    organizerName,
+    postTitle,
+    volunteerNeed,
+  } = data;
   const handleSuggBox = (e) => {
     const suggCheck = e.target.checked;
     if (suggCheck) {
@@ -16,7 +31,7 @@ const BeVolunteer = () => {
   const handleBeVolunteer = (e) => {
     e.preventDefault();
     // const from = e.target;
-    toast.success('Requested Confirm!');
+    toast.success("Requested Confirm!");
   };
   return (
     <>
@@ -40,6 +55,7 @@ const BeVolunteer = () => {
                   <input
                     type="text"
                     name="thumbnail"
+                    defaultValue={thumbnail}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter Thumbnail Url"
                     required
@@ -53,6 +69,7 @@ const BeVolunteer = () => {
                   <input
                     type="text"
                     name="post_title"
+                    defaultValue={postTitle}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write Post Title"
                     required
@@ -68,6 +85,7 @@ const BeVolunteer = () => {
                   <input
                     type="text"
                     name="post_category"
+                    defaultValue={category}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write Post Category"
                     required
@@ -76,11 +94,12 @@ const BeVolunteer = () => {
                 </div>
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Post Title
+                    Location
                   </label>
                   <input
                     type="text"
                     name="post_title"
+                    defaultValue={location}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write post title"
                     required
@@ -109,6 +128,7 @@ const BeVolunteer = () => {
                   <input
                     type="text"
                     name="volunteer_need"
+                    defaultChecked={volunteerNeed}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="John"
                     defaultValue={10}
@@ -125,8 +145,8 @@ const BeVolunteer = () => {
                   <input
                     type="text"
                     name="organizer_name"
+                    defaultValue={user?.displayName}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="John"
                     required
                     readOnly
                   />
@@ -138,8 +158,8 @@ const BeVolunteer = () => {
                   <input
                     type="email"
                     name="organizer_email"
+                    defaultValue={user?.email}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="John"
                     required
                     readOnly
                   />
@@ -150,8 +170,9 @@ const BeVolunteer = () => {
                 Post Description
               </label>
               <textarea
-                id="message"
+                name="post_decription"
                 rows="4"
+                defaultValue={description}
                 className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Write your thoughts here..."
                 readOnly
@@ -167,7 +188,7 @@ const BeVolunteer = () => {
                   Post Suggestion
                 </div>
                 <textarea
-                  id="suggestion"
+                  name="post_suggestion"
                   rows="4"
                   className={`${
                     show ? "flex" : "hidden"
@@ -187,5 +208,7 @@ const BeVolunteer = () => {
     </>
   );
 };
-
+BeVolunteer.propTypes = {
+  data: PropTypes.object,
+};
 export default BeVolunteer;

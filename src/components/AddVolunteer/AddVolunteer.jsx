@@ -8,6 +8,7 @@ import ReactDatePicker from "react-datepicker";
 const AddVolunteer = () => {
   const axiosSecure = useAxios();
   const [startDate, setStartDate] = useState(new Date());
+  console.log(startDate.toLocaleDateString())
   const { user, userVolunteerData, setUserVolunteerData } = useAuth();
   const handleUserData = (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const AddVolunteer = () => {
 
     const category = from.post_category.value;
     const location = from.post_location.value;
-    const dateline = startDate;
+    const dateline = startDate.toLocaleDateString();
     const volunteerNeed = from.volunteer_need.value;
     const description = from.post_description.value;
     const orgaName = from.organizer_name.value;
@@ -33,7 +34,7 @@ const AddVolunteer = () => {
       organizerName: orgaName,
       organizerEmail: orgaEmail,
     };
-    setUserVolunteerData([postDetails, ...userVolunteerData]);
+    setUserVolunteerData([...userVolunteerData,postDetails]);
     //
     axiosSecure
       .post("/user_volunteer_post", postDetails)

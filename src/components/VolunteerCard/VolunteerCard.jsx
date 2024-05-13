@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const VolunteerCard = ({ post }) => {
-  const {thumbnail,shortDescription,postTitle,category,dateline,} = post;
+  const {_id,thumbnail,shortDescription,postTitle,category,dateline,} = post;
   return (
     <div>
 
@@ -25,7 +25,7 @@ const VolunteerCard = ({ post }) => {
           </p>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 capitalize"></p>
           <Link
-            to="/volunteer_details_page"
+            to={`/volunteer_details_page/${_id}`}
             className="btn btn-neutral px-8 mt-5"
           >
             <TbListDetails /> Details

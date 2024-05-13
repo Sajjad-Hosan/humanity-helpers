@@ -28,7 +28,7 @@ const TableCard = ({ details }) => {
           {postTitle}
         </th>
         <td className="px-6 py-4">{category}</td>
-        <td className="px-6 py-4">{dateline.slice(0, 10)}</td>
+        <td className="px-6 py-4">{dateline}</td>
         <td className="py-4 flex gap-5">
           <button className="btn btn-error flex tooltip" data-tip="Delete">
             <FaTrash />

@@ -87,10 +87,7 @@ const AuthProvider = ({ children }) => {
   };
   // mongodb func
   const handleDeletePost = (id) => {
-    return axiosSecure.delete(``);
-  };
-  const handleUpdatePost = (id, details) => {
-    return axiosSecure.patch(``, details);
+    return axiosSecure.delete(`/user_volunteer_post/${id}`);
   };
   //
   const contextProviders = {
@@ -106,7 +103,6 @@ const AuthProvider = ({ children }) => {
     handleUpdateUser,
     handleSignOut,
     handleDeletePost,
-    handleUpdatePost,
   };
   return (
     <AuthContext.Provider value={contextProviders}>

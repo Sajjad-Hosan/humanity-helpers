@@ -1,16 +1,68 @@
-import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth/useAuth";
+import useAxios from "../../hooks/useAxios";
+import toast from "react-hot-toast";
+import ReactDatePicker from "react-datepicker";
 
 const VolunteerUpdate = () => {
   const loaderData = useLoaderData();
-  const {thumbnail,category,dateline,description,location,organizerEmail,organizerName,postTitle,volunteerNeed} = loaderData;
-  const handleUpdate = 
+  const {
+    _id,
+    thumbnail,
+    category,
+    dateline,
+    description,
+    location,
+    organizerEmail,
+    organizerName,
+    postTitle,
+    volunteerNeed,
+  } = loaderData;
+  const axiosSecure = useAxios();
+  const navigate = useNavigate();
+  const [startDate, setStartDate] = useState(new Date(dateline));
+  const { user, userVolunteerData, setUserVolunteerData } = useAuth();
+  const handleUserData = (e) => {
+    e.preventDefault();
+    const from = e.target;
+    const thumbnail = from.thumbnail.value;
+    const postTitle = from.post_title.value;
+    const category = from.post_category.value;
+    const location = from.post_location.value;
+    const dateline = startDate.toLocaleDateString();
+    const volunteerNeed = from.volunteer_need.value;
+    const description = from.post_description.value;
+    const orgaName = from.organizer_name.value;
+    const orgaEmail = from.organizer_email.value;
+    const postDetails = {
+      thumbnail: thumbnail,
+      postTitle: postTitle,
+      category: category,
+      location: location,
+      dateline: dateline,
+      volunteerNeed: volunteerNeed,
+      description: description,
+      organizerName: orgaName,
+      organizerEmail: orgaEmail,
+    };
+    //
+    axiosSecure
+      .patch(`/user_volunteer_post/${_id}`, postDetails)
+      .then(() => {
+        toast.success("Data has been Updated!");
+        from.reset();
+        navigate(-1);
+      })
+      .catch((e) => toast.error(e.message));
+  };
   return (
     <div className="flex flex-col gap-4 px-10 mt-5">
       <div className="flex mb-5">
         <h1 className="text-4xl">Update Post</h1>
       </div>
       <div className="">
-        <form className="flex flex-col gap-3">
+        <form onSubmit={handleUserData} className="flex flex-col gap-3">
           <div className="grid grid-cols-2 gap-8">
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -72,13 +124,11 @@ const VolunteerUpdate = () => {
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Post Dedline
               </label>
-              <input
-                type="text"
-                name="post_dedline"
-                defaultValue={dateline}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="John"
-                required
+              <ReactDatePicker
+                dateFormat="yyyy/MM/dd"
+                className="input input-bordered w-full"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
               />
             </div>
             <div>
@@ -128,7 +178,7 @@ const VolunteerUpdate = () => {
             Post Description
           </label>
           <textarea
-            id="message"
+            name="post_description"
             rows="4"
             defaultValue={description}
             className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -137,7 +187,7 @@ const VolunteerUpdate = () => {
           <input
             type="submit"
             value={"Update Post"}
-            className="btn btn-info w-full md:w-1/4 mt-5 mx-auto"
+            className="btn btn-info w-full md:w-1/4 mt-5 mb-10 mx-auto"
           />
         </form>
       </div>
