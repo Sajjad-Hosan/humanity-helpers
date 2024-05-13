@@ -12,6 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../services/firebase/firebase";
+import useAxios from "../hooks/useAxios";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -19,6 +20,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loader, setLoader] = useState(true);
+  const axiosSecure = useAxios();
 
   const googleAuth = new GoogleAuthProvider();
   const githubAuth = new GithubAuthProvider();
@@ -63,6 +65,13 @@ const AuthProvider = ({ children }) => {
   const handleSignOut = () => {
     return signOut(auth);
   };
+  // mongodb func
+  const handleDeletePost = (id) => {
+    return axiosSecure.delete(``);
+  };
+  const handleUpdatePost = (id, details) => {
+    return axiosSecure.patch(``, details);
+  };
 
   const contextProviders = {
     user,
@@ -74,6 +83,8 @@ const AuthProvider = ({ children }) => {
     handleUsedUser,
     handleUpdateUser,
     handleSignOut,
+    handleDeletePost,
+    handleUpdatePost,
   };
   return (
     <AuthContext.Provider value={contextProviders}>

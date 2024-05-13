@@ -6,6 +6,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import NeedVolunteerPage from "../pages/NeedVolunteerPage/NeedVolunteerPage";
 import MyPosts from "../pages/MyPosts/MyPosts";
+import VolunteerDetailsPage from "../pages/VolunteerDetailsPage/VolunteerDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/need_volunteer_page",
+        loader: () => fetch("/volunteer.json"),
         element: <NeedVolunteerPage />,
+      },
+      {
+        path: "/volunteer_details_page",
+        element: <VolunteerDetailsPage />,
       },
       {
         path: "/my_posts",

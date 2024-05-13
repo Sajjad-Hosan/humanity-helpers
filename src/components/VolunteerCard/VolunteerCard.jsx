@@ -1,4 +1,5 @@
 import { TbListDetails } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 const VolunteerCard = () => {
   return (
@@ -17,9 +18,9 @@ const VolunteerCard = () => {
             children health care
           </p>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 capitalize"></p>
-          <button className="btn btn-neutral px-8 mt-5">
+          <Link to='/volunteer_details_page' className="btn btn-neutral px-8 mt-5">
             <TbListDetails /> Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -2,11 +2,15 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import VolunteerCard from "../../components/VolunteerCard/VolunteerCard";
 import { Helmet } from "react-helmet-async";
 import SearchBox from "../../components/SearchBox/SearchBox";
+import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
 
 const NeedVolunteerPage = () => {
+  const loaderData = useLoaderData();
+  const [items, setItems] = useState(loaderData);
   return (
     <>
-    <SearchBox/>
+      <SearchBox />
       <div className="flex flex-col gap-5 px-10 py-6">
         <Helmet>
           <title>Need Volunteer Page | HumanityPlatform</title>
@@ -29,18 +33,9 @@ const NeedVolunteerPage = () => {
           </label>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-4">
-          <VolunteerCard />
-          <VolunteerCard />
-          <VolunteerCard />
-          <VolunteerCard />
-          <VolunteerCard />
-          <VolunteerCard />
-          <VolunteerCard />
-          <VolunteerCard />
-          <VolunteerCard />
-          <VolunteerCard />
-          <VolunteerCard />
-          <VolunteerCard />
+          {
+            items.map((item,i) => <VolunteerCard key={i} item={item} />)
+          }
         </div>
         <div className="join mx-auto mt-8">
           <button className="join-item btn btn-outline">Previous</button>
