@@ -1,5 +1,6 @@
 import { FiEdit } from "react-icons/fi";
 import { FaTrash } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const CardBox = () => {
   return (
@@ -17,14 +18,18 @@ const CardBox = () => {
           </div>
         </div>
         <div className="flex justify-between items-center border-t-2 pt-4 mt-4">
-        <div className="badge badge-info py-4 px-5">Status</div>
+          <div className="badge badge-info py-4 px-5">Status</div>
           <div className="flex gap-5">
             <button className="btn btn-error flex tooltip" data-tip="Delete">
               <FaTrash />
             </button>
-            <button className="btn btn-outline flex tooltip" data-tip="Update">
+            <Link
+              to='/volunteer_updat_post'
+              className="btn btn-outline flex tooltip"
+              data-tip="Update"
+            >
               <FiEdit />
-            </button>
+            </Link>
           </div>
         </div>
       </div>

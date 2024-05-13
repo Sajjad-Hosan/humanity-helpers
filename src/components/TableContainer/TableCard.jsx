@@ -2,6 +2,7 @@ import { FiEdit } from "react-icons/fi";
 import { FaTrash } from "react-icons/fa6";
 import useAuth from "../../hooks/useAuth/useAuth";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 const TableCard = () => {
   const { handleDeletePost, handleUpdatePost } = useAuth();
   const PostDelete = (id) => {
@@ -29,9 +30,9 @@ const TableCard = () => {
           <button className="btn btn-error flex tooltip" data-tip="Delete">
             <FaTrash />
           </button>
-          <button className="btn btn-outline flex tooltip" data-tip="Update">
+          <Link to='/volunteer_update_post' className="btn btn-outline flex tooltip" data-tip="Update">
             <FiEdit />
-          </button>
+          </Link>
         </td>
       </tr>
     </>

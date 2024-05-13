@@ -7,6 +7,7 @@ import Register from "../pages/Register/Register";
 import NeedVolunteerPage from "../pages/NeedVolunteerPage/NeedVolunteerPage";
 import MyPosts from "../pages/MyPosts/MyPosts";
 import VolunteerDetailsPage from "../pages/VolunteerDetailsPage/VolunteerDetailsPage";
+import VolunteerUpdate from "../pages/VolunteerUpdate/VolunteerUpdate";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/volunteer_details_page",
         element: <VolunteerDetailsPage />,
+      },
+      {
+        path: "/volunteer_update_post",
+        element: <VolunteerUpdate />,
       },
       {
         path: "/my_posts",
