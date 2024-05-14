@@ -20,7 +20,6 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [userVolunteerData, setUserVolunteerData] = useState([]);
-  const [myLists, setMyLists] = useState(userVolunteerData ? true : false);
 
   const [loading, setLoading] = useState(true);
   const [loader, setLoader] = useState(true);
@@ -100,8 +99,6 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     loader,
-    myLists,
-    setMyLists,
     userVolunteerData,
     setUserVolunteerData,
     handleGithub,

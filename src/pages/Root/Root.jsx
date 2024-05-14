@@ -34,9 +34,11 @@ const Root = () => {
           pauseOnHover
         />
       </div>
+      <div className="flex flex-col justify-between min-h-screen overflow-hidden">
       <Header />
       <Outlet />
       <Footer />
+      </div>
     </>
   );
 };

@@ -8,7 +8,7 @@ import ReactDatePicker from "react-datepicker";
 const AddVolunteer = () => {
   const axiosSecure = useAxios();
   const [startDate, setStartDate] = useState(new Date());
-  console.log(startDate.toLocaleDateString())
+  console.log(startDate.toLocaleDateString());
   const { user, userVolunteerData, setUserVolunteerData } = useAuth();
   const handleUserData = (e) => {
     e.preventDefault();
@@ -29,12 +29,12 @@ const AddVolunteer = () => {
       category: category,
       location: location,
       dateline: dateline,
-      volunteerNeed: volunteerNeed,
+      volunteerNeed: parseInt(volunteerNeed),
       description: description,
       organizerName: orgaName,
       organizerEmail: orgaEmail,
     };
-    setUserVolunteerData([...userVolunteerData,postDetails]);
+    setUserVolunteerData([...userVolunteerData, postDetails]);
     //
     axiosSecure
       .post("/user_volunteer_post", postDetails)
@@ -57,10 +57,7 @@ const AddVolunteer = () => {
             </form>
           </div>
           <div className="flex flex-col">
-            <form
-              onSubmit={handleUserData}
-              className="flex flex-col gap-3"
-            >
+            <form onSubmit={handleUserData} className="flex flex-col gap-3">
               <div className="grid grid-cols-2 gap-8">
                 <div>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">

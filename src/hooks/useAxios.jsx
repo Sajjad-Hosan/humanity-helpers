@@ -13,7 +13,7 @@ const useAxios = () => {
     axiosSecure.interceptors.response.use(
       (res) => {
         return res;
-      },
+      }
       // (error) => {
       //   if (error.response.status === 401 || error.response.status === 403) {
       //     signOut(auth).then(() => {

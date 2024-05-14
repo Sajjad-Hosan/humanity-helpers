@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: () => fetch('http://localhost:5000/volunteers'),
+        loader: () => fetch("http://localhost:5000/volunteers"),
         element: <Home />,
       },
       {
@@ -36,18 +36,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/volunteer_details_page/:id",
-        loader: ({params}) => fetch(`http://localhost:5000/volunteer/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/volunteer/${params.id}`),
         element: <VolunteerDetailsPage />,
       },
       {
         path: "/volunteer_update_post/:id",
-        loader: ({params}) => fetch(`http://localhost:5000/user_volunteer_post/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/user_volunteer_post/${params.id}`),
         element: <VolunteerUpdate />,
       },
       {
-        path: '/update_volunteer_need/:id',
-        loader: ({params}) => fetch(`http://localhost:5000/volunteer/${params.id}`),
-        element: <VolunteerNeedUpdate/>
+        path: "/update_volunteer_need/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/volunteer/${params.id}`),
+        element: <VolunteerNeedUpdate />,
       },
       {
         path: "/my_posts",

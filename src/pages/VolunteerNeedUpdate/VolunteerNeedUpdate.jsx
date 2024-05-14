@@ -36,7 +36,7 @@ const VolunteerNeedUpdate = () => {
       category: category,
       location: location,
       dateline: dateline,
-      volunteerNeed: volunteerNeed,
+      volunteerNeed: parseInt(volunteerNeed),
       description: description,
     };
     //

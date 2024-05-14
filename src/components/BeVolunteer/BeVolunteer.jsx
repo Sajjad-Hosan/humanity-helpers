@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaXmark } from "react-icons/fa6";
 import PropTypes from "prop-types";
@@ -9,6 +9,11 @@ const BeVolunteer = ({ data }) => {
   const { user } = useAuth();
   const axiosSecure = useAxios();
   const [show, setShow] = useState(false);
+  const [request, setRequest] = useState([]);
+  useEffect(() => {
+    const item = localStorage.getItem("req");
+    setRequest(item);
+  }, []);
   const {
     _id,
     thumbnail,
@@ -42,29 +47,31 @@ const BeVolunteer = ({ data }) => {
       location: location,
       description: description,
       suggestion: suggestion,
-      volunteerNeed: volunteerNeed,
+      volunteerNeed: parseInt(volunteerNeed),
       organizerEmail: organizerEmail,
       organizerName: organizerName,
     };
 
     // send data to new collection
     axiosSecure
-      .post("/volunteer_requested", postDeatail)
+      .post(`/volunteer_requested/${_id}`, postDeatail)
       .then((res) => {
         const mess = res.data.message;
         if (mess) {
           return toast.success("Data already exist!");
+        }else{
+          toast.success("Volunteer added successfully!");
+          localStorage.setItem("req", request);
+          setRequest([...request,_id])
         }
-        console.log(res.data);
-        toast.success("Volunteer added successfully!");
       })
-      .catch((e) => toast.error(e.message));
+      // .catch((e) => toast.error(e.message));
   };
   return (
     <>
       <dialog id="be_volunteer" className="modal">
         <div className="modal-box max-w-4xl min-h-screen py-2">
-          <div className="flex flex-col items-center justify-between">
+          <div className="flex items-center justify-between">
             <h3 className="font-bold text-lg">Be a Volunteer</h3>
             <form method="dialog">
               <button className="btn btn-circle btn-ghost">
