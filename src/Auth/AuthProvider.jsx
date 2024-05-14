@@ -20,6 +20,8 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [userVolunteerData, setUserVolunteerData] = useState([]);
+  const [myLists, setMyLists] = useState(userVolunteerData ? true : false);
+
   const [loading, setLoading] = useState(true);
   const [loader, setLoader] = useState(true);
   const axiosSecure = useAxios();
@@ -50,11 +52,13 @@ const AuthProvider = ({ children }) => {
             console.log(res.data);
           });
       } else {
-        axios.post("http://localhost:5000/logout", currentEmail, {
-          withCredentials: true,
-        }).then((res) => {
-          console.log(res.data)
-        })
+        axios
+          .post("http://localhost:5000/logout", currentEmail, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
       }
     });
     return () => unSubscribe();
@@ -83,6 +87,7 @@ const AuthProvider = ({ children }) => {
     });
   };
   const handleSignOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
   // mongodb func
@@ -91,9 +96,12 @@ const AuthProvider = ({ children }) => {
   };
   //
   const contextProviders = {
+    auth,
     user,
     loading,
     loader,
+    myLists,
+    setMyLists,
     userVolunteerData,
     setUserVolunteerData,
     handleGithub,

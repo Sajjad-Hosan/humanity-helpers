@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const VolunteerCard = ({ post }) => {
-  const {_id,thumbnail,shortDescription,postTitle,category,dateline,} = post;
+  const {_id,thumbnail,shortDescription,postTitle,category,volunteerNeed,} = post;
   return (
     <div>
 
@@ -32,7 +32,7 @@ const VolunteerCard = ({ post }) => {
           </Link>
         </div>
         <div className="border-t mt-5 py-3 px-2">
-          <span className="font-bold">Dateline : {dateline}</span>
+          <span className="font-bold">Volunteer Need : {volunteerNeed}</span>
         </div>
       </div>
     </div>

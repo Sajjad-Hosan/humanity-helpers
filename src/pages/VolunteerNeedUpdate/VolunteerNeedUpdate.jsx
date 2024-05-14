@@ -1,11 +1,11 @@
+import ReactDatePicker from "react-datepicker";
+import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth/useAuth";
 import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth/useAuth";
 import useAxios from "../../hooks/useAxios";
-import toast from "react-hot-toast";
-import ReactDatePicker from "react-datepicker";
 
-const VolunteerUpdate = () => {
+const VolunteerNeedUpdate = () => {
   const loaderData = useLoaderData();
   const {
     _id,
@@ -14,15 +14,12 @@ const VolunteerUpdate = () => {
     dateline,
     description,
     location,
-    organizerEmail,
-    organizerName,
     postTitle,
     volunteerNeed,
   } = loaderData;
   const axiosSecure = useAxios();
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date(dateline));
-  const { user } = useAuth();
   const handleUserData = (e) => {
     e.preventDefault();
     const from = e.target;
@@ -33,8 +30,6 @@ const VolunteerUpdate = () => {
     const dateline = startDate.toLocaleDateString();
     const volunteerNeed = from.volunteer_need.value;
     const description = from.post_description.value;
-    const orgaName = from.organizer_name.value;
-    const orgaEmail = from.organizer_email.value;
     const postDetails = {
       thumbnail: thumbnail,
       postTitle: postTitle,
@@ -43,12 +38,10 @@ const VolunteerUpdate = () => {
       dateline: dateline,
       volunteerNeed: volunteerNeed,
       description: description,
-      organizerName: orgaName,
-      organizerEmail: orgaEmail,
     };
     //
     axiosSecure
-      .patch(`/user_volunteer_post/${_id}`, postDetails)
+      .patch(`/volunteer/${_id}`, postDetails)
       .then(() => {
         toast.success("Data has been Updated!");
         from.reset();
@@ -60,6 +53,9 @@ const VolunteerUpdate = () => {
     <div className="flex flex-col gap-4 px-10 mt-5">
       <div className="flex mb-5">
         <h1 className="text-4xl">Update Post</h1>
+      </div>
+      <div className="w-full h-[400px]">
+        <img src={thumbnail} alt="" className="w-full h-full object-contain" />
       </div>
       <div className="">
         <form onSubmit={handleUserData} className="flex flex-col gap-3">
@@ -145,35 +141,6 @@ const VolunteerUpdate = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-8">
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Organizer Name
-              </label>
-              <input
-                type="text"
-                name="organizer_name"
-                defaultValue={user?.displayName}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required
-                readOnly
-              />
-            </div>
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Organizer Email
-              </label>
-              <input
-                type="email"
-                name="organizer_email"
-                defaultValue={user?.email}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required
-                readOnly
-              />
-            </div>
-          </div>
-
           <label className="block text-sm font-medium text-gray-900 dark:text-white">
             Post Description
           </label>
@@ -195,4 +162,4 @@ const VolunteerUpdate = () => {
   );
 };
 
-export default VolunteerUpdate;
+export default VolunteerNeedUpdate;

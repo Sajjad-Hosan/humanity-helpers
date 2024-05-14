@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaXmark } from "react-icons/fa6";
 import PropTypes from "prop-types";
 import useAuth from "../../hooks/useAuth/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 const BeVolunteer = ({ data }) => {
-  const {user} = useAuth()
+  const { user } = useAuth();
+  const axiosSecure = useAxios();
   const [show, setShow] = useState(false);
-  const [no, setNo] = useState(0);
   const {
     _id,
     thumbnail,
@@ -30,14 +31,40 @@ const BeVolunteer = ({ data }) => {
   };
   const handleBeVolunteer = (e) => {
     e.preventDefault();
-    // const from = e.target;
-    toast.success("Requested Confirm!");
+    const from = e.target;
+    const suggestion = from.post_suggestion.value;
+    const postDeatail = {
+      postId: _id,
+      thumbnail: thumbnail,
+      postTitle: postTitle,
+      category: category,
+      dateline: dateline,
+      location: location,
+      description: description,
+      suggestion: suggestion,
+      volunteerNeed: volunteerNeed,
+      organizerEmail: organizerEmail,
+      organizerName: organizerName,
+    };
+
+    // send data to new collection
+    axiosSecure
+      .post("/volunteer_requested", postDeatail)
+      .then((res) => {
+        const mess = res.data.message;
+        if (mess) {
+          return toast.success("Data already exist!");
+        }
+        console.log(res.data);
+        toast.success("Volunteer added successfully!");
+      })
+      .catch((e) => toast.error(e.message));
   };
   return (
     <>
       <dialog id="be_volunteer" className="modal">
         <div className="modal-box max-w-4xl min-h-screen py-2">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col items-center justify-between">
             <h3 className="font-bold text-lg">Be a Volunteer</h3>
             <form method="dialog">
               <button className="btn btn-circle btn-ghost">
@@ -115,8 +142,8 @@ const BeVolunteer = ({ data }) => {
                   <input
                     type="text"
                     name="post_dedline"
+                    defaultValue={dateline}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="John"
                     required
                     readOnly
                   />
@@ -128,10 +155,8 @@ const BeVolunteer = ({ data }) => {
                   <input
                     type="text"
                     name="volunteer_need"
-                    defaultChecked={volunteerNeed}
+                    defaultValue={volunteerNeed}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="John"
-                    defaultValue={10}
                     required
                     readOnly
                   />

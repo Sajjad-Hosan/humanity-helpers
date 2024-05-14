@@ -10,9 +10,9 @@ import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth/useAuth";
 import toast from "react-hot-toast";
 const MyPosts = () => {
-  const { userVolunteerData, user, setUserVolunteerData } = useAuth();
+  const { userVolunteerData, user, setUserVolunteerData, myLists, setMyLists } =
+    useAuth();
   const axiosSecure = useAxios();
-  const [myLists, setMyLists] = useState(userVolunteerData ? true : false);
   const [tableType, setTableType] = useState();
   useEffect(() => {
     const type = JSON.parse(localStorage.getItem("tableType"));

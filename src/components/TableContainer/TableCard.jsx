@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const TableCard = ({ details }) => {
-  const {_id, thumbnail, postTitle, category, dateline } = details;
-  const { handleDeletePost, handleUpdatePost } = useAuth();
+  const { _id, thumbnail, postTitle, category, dateline } = details;
+  const { handleDeletePost, setUserVolunteerData } = useAuth();
   const PostDelete = (id) => {
     handleDeletePost(id)
       .then(() => {
         toast.success("Deleted Successfully!");
+        setUserVolunteerData((ex) => ex.filter((item) => item._id !== id));
       })
       .catch((e) => toast.error(e.message));
   };
@@ -30,7 +31,11 @@ const TableCard = ({ details }) => {
         <td className="px-6 py-4">{category}</td>
         <td className="px-6 py-4">{dateline}</td>
         <td className="py-4 flex gap-5">
-          <button className="btn btn-error flex tooltip" data-tip="Delete">
+          <button
+            onClick={() => PostDelete(_id)}
+            className="btn btn-error flex tooltip"
+            data-tip="Delete"
+          >
             <FaTrash />
           </button>
           <Link
