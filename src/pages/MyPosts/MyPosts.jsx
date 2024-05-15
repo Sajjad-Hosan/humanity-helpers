@@ -9,7 +9,13 @@ import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth/useAuth";
 import toast from "react-hot-toast";
 const MyPosts = () => {
-  const { userVolunteerData, user, setUserVolunteerData } = useAuth();
+  const {
+    userVolunteerData,
+    user,
+    setUserVolunteerData,
+    userRequestData,
+    setUserRequestData,
+  } = useAuth();
   const axiosSecure = useAxios();
   const [tableType, setTableType] = useState();
   const [tab, setTab] = useState(0);
@@ -17,7 +23,9 @@ const MyPosts = () => {
     const type = JSON.parse(localStorage.getItem("tableType"));
     setTableType(type);
   }, []);
-  const url = `user_volunteer_posts?email=${user?.email}`;
+  const url = `/user_volunteer_posts?email=${user?.email}`;
+  const url2 = `/volunteer_requested?email=${user?.email}`;
+
   useEffect(() => {
     axiosSecure
       .get(url)
@@ -26,6 +34,15 @@ const MyPosts = () => {
       })
       .catch((e) => toast.error(e.message));
   }, [url]);
+
+  useEffect(() => {
+    axiosSecure
+      .get(url2)
+      .then((res) => {
+        setUserRequestData(res.data);
+      })
+      .catch((e) => toast.error(e.message));
+  }, []);
   const handleTableType = (boo) => {
     setTableType(boo);
     localStorage.setItem("tableType", boo);
@@ -99,9 +116,9 @@ const MyPosts = () => {
           {userVolunteerData.length > 0 ? (
             <div className="relative overflow-hidden mt-8">
               {tableType ? (
-                <TableContainer myLists={userVolunteerData} />
+                <TableContainer req={false}  myLists={userVolunteerData} />
               ) : (
-                <CardContainer myLists={userVolunteerData} />
+                <CardContainer req={false}  myLists={userVolunteerData} />
               )}
             </div>
           ) : (
@@ -109,12 +126,12 @@ const MyPosts = () => {
           )}
         </div>
         <div className={`text-4xl ${tab === 1 ? "" : "hidden"}`}>
-          {userVolunteerData.length > 0 ? (
+          {userRequestData.length > 0 ? (
             <div className="relative overflow-hidden mt-8">
               {tableType ? (
-                <TableContainer myLists={userVolunteerData} />
+                <TableContainer req={true}  myLists={userRequestData} />
               ) : (
-                <CardContainer myLists={userVolunteerData} />
+                <CardContainer req={true}  myLists={userRequestData} />
               )}
             </div>
           ) : (

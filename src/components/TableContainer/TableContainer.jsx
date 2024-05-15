@@ -1,7 +1,7 @@
 import TableCard from "./TableCard";
 import PropTypes from "prop-types";
 
-const TableContainer = ({ myLists }) => {
+const TableContainer = ({ myLists,req }) => {
   return (
     <div>
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -26,7 +26,7 @@ const TableContainer = ({ myLists }) => {
         </thead>
         <tbody>
           {myLists.map((list) => (
-            <TableCard key={list._id} details={list} />
+            <TableCard req={req}  key={list._id} details={list} />
           ))}
         </tbody>
       </table>

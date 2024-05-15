@@ -9,6 +9,7 @@ import MyPosts from "../pages/MyPosts/MyPosts";
 import VolunteerDetailsPage from "../pages/VolunteerDetailsPage/VolunteerDetailsPage";
 import VolunteerUpdate from "../pages/VolunteerUpdate/VolunteerUpdate";
 import VolunteerNeedUpdate from "../pages/VolunteerNeedUpdate/VolunteerNeedUpdate";
+import PrivateRoute from "../services/firebase/Private/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -38,23 +39,41 @@ const router = createBrowserRouter([
         path: "/volunteer_details_page/:id",
         loader: ({ params }) =>
           fetch(`http://localhost:5000/volunteer/${params.id}`),
-        element: <VolunteerDetailsPage />,
+        element: (
+          <PrivateRoute>
+            <VolunteerDetailsPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/volunteer_update_post/:id",
         loader: ({ params }) =>
           fetch(`http://localhost:5000/user_volunteer_post/${params.id}`),
-        element: <VolunteerUpdate />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <VolunteerUpdate />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/update_volunteer_need/:id",
         loader: ({ params }) =>
           fetch(`http://localhost:5000/volunteer/${params.id}`),
-        element: <VolunteerNeedUpdate />,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <VolunteerNeedUpdate />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my_posts",
-        element: <MyPosts />,
+        element: (
+          <PrivateRoute>
+            <MyPosts />
+          </PrivateRoute>
+        ),
       },
     ],
   },

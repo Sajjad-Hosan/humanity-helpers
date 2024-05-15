@@ -8,13 +8,13 @@ const PrivateRoute = ({ children }) => {
   const { pathname } = useLocation();
   if (loading) {
     return (
-      <div className="flex items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-screen">
         <Loading />
       </div>
     );
   }
   if (user) {
-    return { children };
+    return <>{ children }</>;
   }
   return <Navigate to="/login" state={pathname} />;
 };

@@ -11,13 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const Root = () => {
   const { loader } = useAuth();
-  if (loader) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loading />
-      </div>
-    );
-  }
+  //
   return (
     <>
       <div className="absolute">

@@ -16,7 +16,9 @@ const ProfileNav = () => {
   };
   return (
     <>
+    <div className="absolute h-0 w-0">
       <Profile />
+    </div>
       <div className="dropdown dropdown-end">
         <div
           tabIndex={0}

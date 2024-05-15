@@ -20,6 +20,8 @@ const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
   const [userVolunteerData, setUserVolunteerData] = useState([]);
+  const [userRequestData, setUserRequestData] = useState([]);
+  const [req, setReq] = useState(false);
 
   const [loading, setLoading] = useState(true);
   const [loader, setLoader] = useState(true);
@@ -47,16 +49,16 @@ const AuthProvider = ({ children }) => {
           .post("http://localhost:5000/jwt", currentEmail, {
             withCredentials: true,
           })
-          .then((res) => {
-            console.log(res.data);
+          .then(() => {
+            // console.log(res.data);
           });
       } else {
         axios
           .post("http://localhost:5000/logout", currentEmail, {
             withCredentials: true,
           })
-          .then((res) => {
-            console.log(res.data);
+          .then(() => {
+            // console.log(res.data);
           });
       }
     });
@@ -93,13 +95,20 @@ const AuthProvider = ({ children }) => {
   const handleDeletePost = (id) => {
     return axiosSecure.delete(`/user_volunteer_post/${id}`);
   };
+  const handleDeleteRequest = (id) => {
+    return axiosSecure.delete(`/volunteer_requested/${id}`);
+  };
   //
   const contextProviders = {
     auth,
     user,
     loading,
     loader,
+    req,
+    setReq,
     userVolunteerData,
+    userRequestData,
+    setUserRequestData,
     setUserVolunteerData,
     handleGithub,
     handleGoogle,
@@ -108,6 +117,7 @@ const AuthProvider = ({ children }) => {
     handleUpdateUser,
     handleSignOut,
     handleDeletePost,
+    handleDeleteRequest,
   };
   return (
     <AuthContext.Provider value={contextProviders}>

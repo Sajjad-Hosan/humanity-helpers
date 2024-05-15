@@ -2,9 +2,11 @@ import { IoPersonAddOutline } from "react-icons/io5";
 import BeVolunteer from "../../components/BeVolunteer/BeVolunteer";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
+import useAuth from "../../hooks/useAuth/useAuth";
 const VolunteerDetailsPage = () => {
+  const { req, user } = useAuth();
   const loaderData = useLoaderData();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     _id,
     thumbnail,
@@ -19,7 +21,12 @@ const VolunteerDetailsPage = () => {
     <>
       <BeVolunteer data={loaderData} />
       <div className="px-5 md:px-10 mt-10 relative">
-        <button onClick={() => navigate(-1)} className="btn btn-ghost mb-10 px-8"><FaArrowLeft/> Back</button>
+        <button
+          onClick={() => navigate(-1)}
+          className="btn btn-ghost mb-10 px-8"
+        >
+          <FaArrowLeft /> Back
+        </button>
         <div className="card overflow-hidden bg-neutral h-[400px] md:h-[550px]">
           <img src={thumbnail} alt="" className="w-full h-full object-cover" />
         </div>
@@ -44,21 +51,31 @@ const VolunteerDetailsPage = () => {
           <p className="text-md my-2 badge badge-info px-4 py-4 font-semibold">
             Dateline- {dateline}
           </p>
-          <div className="flex items-center mt-8  gap-10">
-            <button
-              onClick={() =>
-                document.getElementById("be_volunteer").showModal()
-              }
-              className="btn btn-neutral text-info px-10 w-1/4"
-            >
-              <IoPersonAddOutline /> Be a Volunteer
-            </button>
-            <Link
-              className="btn btn-outline px-8"
-              to={`/update_volunteer_need/${_id}`}
-            >
-              Update Page
-            </Link>
+          <div className="flex items-center mt-8 gap-10">
+            {req ? (
+              <button className="btn btn-neutral text-info px-10 w-1/4">
+                Requested
+              </button>
+            ) : (
+              <button
+                onClick={() =>
+                  document.getElementById("be_volunteer").showModal()
+                }
+                className="btn btn-neutral text-info px-10 w-1/4"
+              >
+                <IoPersonAddOutline /> Be a Volunteer
+              </button>
+            )}
+            {user?.email === "s4jj4dh034n@gmail.com" ? (
+              <Link
+                className="btn btn-outline px-8"
+                to={`/update_volunteer_need/${_id}`}
+              >
+                Update Page
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div className="h-[300px]"></div>

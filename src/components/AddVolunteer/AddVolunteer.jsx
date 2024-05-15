@@ -4,11 +4,12 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth/useAuth";
 import ReactDatePicker from "react-datepicker";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AddVolunteer = () => {
   const axiosSecure = useAxios();
+  const navigate = useNavigate()
   const [startDate, setStartDate] = useState(new Date());
-  console.log(startDate.toLocaleDateString());
   const { user, userVolunteerData, setUserVolunteerData } = useAuth();
   const handleUserData = (e) => {
     e.preventDefault();
@@ -44,6 +45,9 @@ const AddVolunteer = () => {
       })
       .catch((e) => toast.error(e.message));
   };
+  if(!user){
+    return <Navigate to='/login' />
+  }
   return (
     <>
       <dialog id="add_box" className="modal">

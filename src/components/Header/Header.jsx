@@ -94,7 +94,7 @@ const Header = () => {
         </div>
         <Link
           to="/"
-          className="btn btn-ghost text-xl animate__animated animate__bounceInLeft"
+          className="btn btn-ghost text-xl animate__zoomIn"
         >
           <img className="w-9 h-9 object-cover" src={logo} alt="" />
           <Typewriter
@@ -111,7 +111,7 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-2">{navLinks}</ul>
       </div>
-      <div className="navbar-end animate__animated animate__bounce z-10">
+      <div className="navbar-end animate__zoomIn z-10">
         <div className="dropdown mr-5 z-10">
           <div tabIndex={0} role="button" className="btn btn-outline px-8">
             Theme

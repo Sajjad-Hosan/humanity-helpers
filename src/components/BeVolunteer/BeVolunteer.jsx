@@ -4,16 +4,13 @@ import { FaXmark } from "react-icons/fa6";
 import PropTypes from "prop-types";
 import useAuth from "../../hooks/useAuth/useAuth";
 import useAxios from "../../hooks/useAxios";
+import { Navigate } from "react-router-dom";
 
 const BeVolunteer = ({ data }) => {
-  const { user } = useAuth();
+  const { user,setReq } = useAuth();
   const axiosSecure = useAxios();
   const [show, setShow] = useState(false);
-  const [request, setRequest] = useState([]);
-  useEffect(() => {
-    const item = localStorage.getItem("req");
-    setRequest(item);
-  }, []);
+
   const {
     _id,
     thumbnail,
@@ -48,25 +45,24 @@ const BeVolunteer = ({ data }) => {
       description: description,
       suggestion: suggestion,
       volunteerNeed: parseInt(volunteerNeed),
-      organizerEmail: organizerEmail,
-      organizerName: organizerName,
+      organizerEmail: user?.email,
+      organizerName: user?.displayName,
     };
 
     // send data to new collection
-    axiosSecure
-      .post(`/volunteer_requested/${_id}`, postDeatail)
-      .then((res) => {
-        const mess = res.data.message;
-        if (mess) {
-          return toast.success("Data already exist!");
-        }else{
-          toast.success("Volunteer added successfully!");
-          localStorage.setItem("req", request);
-          setRequest([...request,_id])
-        }
-      })
-      // .catch((e) => toast.error(e.message));
+    axiosSecure.post(`/volunteer_requested/${_id}`, postDeatail).then((res) => {
+      const mess = res.data.message;
+      if (mess) {
+        setReq(true);
+        return toast.success("Data already exist!");
+      }
+      setReq(true)
+      toast.success("Volunteer added successfully!");
+    });
   };
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
   return (
     <>
       <dialog id="be_volunteer" className="modal">
