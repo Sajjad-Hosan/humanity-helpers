@@ -6,8 +6,9 @@ import { FaPlus } from "react-icons/fa6";
 import TableContainer from "../../components/TableContainer/TableContainer";
 import CardContainer from "../../components/CardContainer/CardContainer";
 import useAxios from "../../hooks/useAxios";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 const MyPosts = () => {
   const {
     userVolunteerData,
@@ -49,6 +50,9 @@ const MyPosts = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Humanity || My Posts Page</title>
+      </Helmet>
       <div className="absolute top-0">
         <AddVolunteer />
       </div>
@@ -116,9 +120,9 @@ const MyPosts = () => {
           {userVolunteerData.length > 0 ? (
             <div className="relative overflow-hidden mt-8">
               {tableType ? (
-                <TableContainer req={false}  myLists={userVolunteerData} />
+                <TableContainer req={false} myLists={userVolunteerData} />
               ) : (
-                <CardContainer req={false}  myLists={userVolunteerData} />
+                <CardContainer req={false} myLists={userVolunteerData} />
               )}
             </div>
           ) : (
@@ -129,9 +133,9 @@ const MyPosts = () => {
           {userRequestData.length > 0 ? (
             <div className="relative overflow-hidden mt-8">
               {tableType ? (
-                <TableContainer req={true}  myLists={userRequestData} />
+                <TableContainer req={true} myLists={userRequestData} />
               ) : (
-                <CardContainer req={true}  myLists={userRequestData} />
+                <CardContainer req={true} myLists={userRequestData} />
               )}
             </div>
           ) : (

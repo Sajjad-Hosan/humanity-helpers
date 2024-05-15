@@ -2,7 +2,7 @@ import { FiEdit } from "react-icons/fi";
 import { FaTrash } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 

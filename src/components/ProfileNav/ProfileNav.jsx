@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
 import Profile from "../Profile/Profile";
 import person from "../../assets/image/profile.svg";
 import { useNavigate } from "react-router-dom";
@@ -16,9 +16,9 @@ const ProfileNav = () => {
   };
   return (
     <>
-    <div className="absolute h-0 w-0">
-      <Profile />
-    </div>
+      <div className="absolute h-0 w-0">
+        <Profile />
+      </div>
       <div className="dropdown dropdown-end">
         <div
           tabIndex={0}

@@ -2,7 +2,7 @@ import { FiEdit } from "react-icons/fi";
 import profile from "../../assets/image/profile.svg";
 import { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 

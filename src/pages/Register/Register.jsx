@@ -1,12 +1,13 @@
 import register from "../../assets/authentication/signup.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { AttentionSeeker, Slide, Zoom } from "react-awesome-reveal";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
 import SocialDrop from "../../components/SocialDrop/SocialDrop";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 const Register = () => {
   const [show, setShow] = useState(false);
   const { handleGithub, handleGoogle, handleCreateUser } = useAuth();
@@ -61,6 +62,9 @@ const Register = () => {
   };
   return (
     <div className="max-w-6xl mx-auto mt-5">
+      <Helmet>
+        <title>Humanity ||Register Page</title>
+      </Helmet>
       <div className="flex flex-col-reverse md:flex-row-reverse gap-7 items-center bg-base-100 md:shadow md:shadow-gray-500 py-10 md:h-[580px] rounded-xl">
         <Slide dumping={0.5}>
           <div className="md:w-[600px] relative">

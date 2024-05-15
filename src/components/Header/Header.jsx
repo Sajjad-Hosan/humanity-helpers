@@ -1,6 +1,6 @@
 import { FaUser } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
 import ProfileNav from "../ProfileNav/ProfileNav";
 import logo from "/logo.png";
 import { Typewriter } from "react-simple-typewriter";
@@ -92,10 +92,7 @@ const Header = () => {
             {navLinks}
           </ul>
         </div>
-        <Link
-          to="/"
-          className="btn btn-ghost text-xl animate__zoomIn"
-        >
+        <Link to="/" className="btn btn-ghost text-xl animate__zoomIn">
           <img className="w-9 h-9 object-cover" src={logo} alt="" />
           <Typewriter
             words={["Welcome To", "Humanity Platform"]}

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import toast from "react-hot-toast";
 import ReactDatePicker from "react-datepicker";
+import { Helmet } from "react-helmet-async";
 
 const VolunteerUpdate = () => {
   const loaderData = useLoaderData();
@@ -14,8 +15,6 @@ const VolunteerUpdate = () => {
     dateline,
     description,
     location,
-    organizerEmail,
-    organizerName,
     postTitle,
     volunteerNeed,
   } = loaderData;
@@ -58,6 +57,9 @@ const VolunteerUpdate = () => {
   };
   return (
     <div className="flex flex-col gap-4 px-10 mt-5">
+      <Helmet>
+        <title>Humanity || Volunteer Update Page</title>
+      </Helmet>
       <div className="flex mb-5">
         <h1 className="text-4xl">Update Post</h1>
       </div>

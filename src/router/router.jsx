@@ -10,6 +10,7 @@ import VolunteerDetailsPage from "../pages/VolunteerDetailsPage/VolunteerDetails
 import VolunteerUpdate from "../pages/VolunteerUpdate/VolunteerUpdate";
 import VolunteerNeedUpdate from "../pages/VolunteerNeedUpdate/VolunteerNeedUpdate";
 import PrivateRoute from "../services/firebase/Private/PrivateRoute";
+import SearchPosts from "../pages/SearchPosts/SearchPosts";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyPosts />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/search_post",
+        element: (
+          <PrivateRoute>
+            <SearchPosts />
           </PrivateRoute>
         ),
       },

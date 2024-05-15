@@ -1,12 +1,19 @@
-import { FaEye, FaEyeSlash, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa6";
+import {
+  FaEye,
+  FaEyeSlash,
+  FaGithub,
+  FaGoogle,
+  FaTwitter,
+} from "react-icons/fa6";
 import login from "../../assets/authentication/login.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AttentionSeeker, Slide, Zoom } from "react-awesome-reveal";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 const Login = () => {
-  const [show,setShow] = useState(false);
+  const [show, setShow] = useState(false);
   const { handleGithub, handleGoogle, handleUsedUser } = useAuth();
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -41,6 +48,9 @@ const Login = () => {
   };
   return (
     <div className="max-w-6xl mx-auto mt-5">
+      <Helmet>
+        <title>Humanity || Login Page</title>
+      </Helmet>
       <div className="flex flex-col-reverse md:flex-row gap-7 items-center bg-base-100 md:shadow md:shadow-gray-500 py-10 md:h-[550px] rounded-xl">
         <Slide>
           <div className="w-full md:flex-1">
@@ -63,13 +73,18 @@ const Login = () => {
                   Your password
                 </label>
                 <input
-                  type={show ? 'text': "password"}
+                  type={show ? "text" : "password"}
                   id="password"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="write your password"
                   required
                 />
-                <p onClick={() => setShow(!show)} className="absolute top-10 right-4">{show ? <FaEye/> : <FaEyeSlash/>}</p>
+                <p
+                  onClick={() => setShow(!show)}
+                  className="absolute top-10 right-4"
+                >
+                  {show ? <FaEye /> : <FaEyeSlash />}
+                </p>
               </div>
               <div className="flex items-start mb-5">
                 <div className="flex flex-col gap-1 h-5">

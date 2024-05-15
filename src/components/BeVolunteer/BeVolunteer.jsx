@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaXmark } from "react-icons/fa6";
 import PropTypes from "prop-types";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import { Navigate } from "react-router-dom";
 
 const BeVolunteer = ({ data }) => {
-  const { user,setReq } = useAuth();
+  const { user, setReq } = useAuth();
   const axiosSecure = useAxios();
   const [show, setShow] = useState(false);
 
@@ -18,8 +18,6 @@ const BeVolunteer = ({ data }) => {
     dateline,
     description,
     location,
-    organizerEmail,
-    organizerName,
     postTitle,
     volunteerNeed,
   } = data;
@@ -35,7 +33,7 @@ const BeVolunteer = ({ data }) => {
     e.preventDefault();
     const from = e.target;
     const suggestion = from.post_suggestion.value;
-    const postDeatail = {
+    const postDetail = {
       postId: _id,
       thumbnail: thumbnail,
       postTitle: postTitle,
@@ -50,13 +48,13 @@ const BeVolunteer = ({ data }) => {
     };
 
     // send data to new collection
-    axiosSecure.post(`/volunteer_requested/${_id}`, postDeatail).then((res) => {
+    axiosSecure.post(`/volunteer_requested/${_id}`, postDetail).then((res) => {
       const mess = res.data.message;
       if (mess) {
         setReq(true);
         return toast.success("Data already exist!");
       }
-      setReq(true)
+      setReq(true);
       toast.success("Volunteer added successfully!");
     });
   };

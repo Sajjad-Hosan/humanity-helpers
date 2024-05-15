@@ -21,6 +21,8 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userVolunteerData, setUserVolunteerData] = useState([]);
   const [userRequestData, setUserRequestData] = useState([]);
+  const [items, setItems] = useState([]);
+  const [filter,setFilter] = useState([]);
   const [req, setReq] = useState(false);
 
   const [loading, setLoading] = useState(true);
@@ -106,6 +108,9 @@ const AuthProvider = ({ children }) => {
     loader,
     req,
     setReq,
+    items,
+    filter,setFilter,
+    setItems,
     userVolunteerData,
     userRequestData,
     setUserRequestData,

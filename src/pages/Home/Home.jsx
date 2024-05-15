@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>Humanity || Home</title>
+        <title>Humanity || Home Page</title>
       </Helmet>
       <Banner loaderDatas={loaderDatas} />
       <NeedNowSection loaderDatas={loaderDatas} />

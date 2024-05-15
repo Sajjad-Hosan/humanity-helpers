@@ -2,7 +2,8 @@ import { IoPersonAddOutline } from "react-icons/io5";
 import BeVolunteer from "../../components/BeVolunteer/BeVolunteer";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 const VolunteerDetailsPage = () => {
   const { req, user } = useAuth();
   const loaderData = useLoaderData();
@@ -19,6 +20,9 @@ const VolunteerDetailsPage = () => {
   } = loaderData;
   return (
     <>
+      <Helmet>
+        <title>Humanity || Volunteer Details Page</title>
+      </Helmet>
       <BeVolunteer data={loaderData} />
       <div className="px-5 md:px-10 mt-10 relative">
         <button

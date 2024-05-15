@@ -2,13 +2,12 @@ import { FaXmark } from "react-icons/fa6";
 import useAxios from "../../hooks/useAxios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import useAuth from "../../hooks/useAuth/useAuth";
+import useAuth from "../../hooks/useAuth";
 import ReactDatePicker from "react-datepicker";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const AddVolunteer = () => {
   const axiosSecure = useAxios();
-  const navigate = useNavigate()
   const [startDate, setStartDate] = useState(new Date());
   const { user, userVolunteerData, setUserVolunteerData } = useAuth();
   const handleUserData = (e) => {
@@ -16,7 +15,6 @@ const AddVolunteer = () => {
     const from = e.target;
     const thumbnail = from.thumbnail.value;
     const postTitle = from.post_title.value;
-
     const category = from.post_category.value;
     const location = from.post_location.value;
     const dateline = startDate.toLocaleDateString();
@@ -45,8 +43,8 @@ const AddVolunteer = () => {
       })
       .catch((e) => toast.error(e.message));
   };
-  if(!user){
-    return <Navigate to='/login' />
+  if (!user) {
+    return <Navigate to="/login" />;
   }
   return (
     <>
