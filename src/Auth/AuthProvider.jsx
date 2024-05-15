@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
   const [userVolunteerData, setUserVolunteerData] = useState([]);
   const [userRequestData, setUserRequestData] = useState([]);
   const [items, setItems] = useState([]);
-  const [filter,setFilter] = useState([]);
+  const [filter, setFilter] = useState([]);
   const [req, setReq] = useState(false);
 
   const [loading, setLoading] = useState(true);
@@ -48,17 +48,25 @@ const AuthProvider = ({ children }) => {
       const currentEmail = { email: curEmail };
       if (current) {
         axios
-          .post("http://localhost:5000/jwt", currentEmail, {
-            withCredentials: true,
-          })
+          .post(
+            "https://humanity-helpers-server.vercel.app/jwt",
+            currentEmail,
+            {
+              withCredentials: true,
+            }
+          )
           .then(() => {
             // console.log(res.data);
           });
       } else {
         axios
-          .post("http://localhost:5000/logout", currentEmail, {
-            withCredentials: true,
-          })
+          .post(
+            "https://humanity-helpers-server.vercel.app/logout",
+            currentEmail,
+            {
+              withCredentials: true,
+            }
+          )
           .then(() => {
             // console.log(res.data);
           });
@@ -109,7 +117,8 @@ const AuthProvider = ({ children }) => {
     req,
     setReq,
     items,
-    filter,setFilter,
+    filter,
+    setFilter,
     setItems,
     userVolunteerData,
     userRequestData,

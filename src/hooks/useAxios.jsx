@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://humanity-helpers-server.vercel.app",
   withCredentials: true,
 });
 const useAxios = () => {
@@ -12,7 +12,7 @@ const useAxios = () => {
         return res;
       },
       (error) => {
-        console.log("axios error ", error.response);   
+        console.log("axios error ", error.response);
       }
     );
   }, []);

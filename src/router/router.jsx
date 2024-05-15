@@ -20,7 +20,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: () => fetch("http://localhost:5000/volunteers"),
+        loader: () =>
+          fetch("https://humanity-helpers-server.vercel.app/volunteers"),
         element: <Home />,
       },
       {
@@ -33,13 +34,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/need_volunteer_page",
-        loader: () => fetch("http://localhost:5000/volunteer_posts_count"),
+        loader: () =>
+          fetch(
+            "https://humanity-helpers-server.vercel.app/volunteer_posts_count"
+          ),
         element: <NeedVolunteerPage />,
       },
       {
         path: "/volunteer_details_page/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/volunteer/${params.id}`),
+          fetch(
+            `https://humanity-helpers-server.vercel.app/volunteer/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             <VolunteerDetailsPage />
@@ -49,7 +55,9 @@ const router = createBrowserRouter([
       {
         path: "/volunteer_update_post/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/user_volunteer_post/${params.id}`),
+          fetch(
+            `https://humanity-helpers-server.vercel.app/user_volunteer_post/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             {" "}
@@ -60,7 +68,9 @@ const router = createBrowserRouter([
       {
         path: "/update_volunteer_need/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/volunteer/${params.id}`),
+          fetch(
+            `https://humanity-helpers-server.vercel.app/volunteer/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             {" "}
