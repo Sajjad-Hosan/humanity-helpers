@@ -2,6 +2,7 @@ import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa6";
 import { SiHelpscout } from "react-icons/si";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
+import { Bounce } from "react-awesome-reveal";
 const SocialDrop = ({ goo, git }) => {
   return (
     <>

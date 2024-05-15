@@ -20,7 +20,7 @@ const SearchBox = () => {
               type="text"
               name="search"
               className="input input-bordered w-full mt-5"
-              placeholder="Search here"
+              placeholder="Write Category Name to Search"
             />
             <button className="btn btn-outline mt-4 px-8">Search</button>
           </form>

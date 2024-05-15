@@ -48,20 +48,20 @@ const TableCard = ({ details, req }) => {
   };
   return (
     <>
-      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-        <th className="w-10 h-10 rounded-md">
+      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 flex justify-between items-center">
+        <th className="w-14 h-14">
           <img src={thumbnail} className="w-full h-full object-cover" alt="" />
         </th>
         <th
           scope="row"
-          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+          className=" py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
         >
           {postTitle}
         </th>
-        <td className="px-6 py-4">{category}</td>
-        <td className="px-6 py-4">{dateline}</td>
+        <td className=" py-4">{category}</td>
+        <td className=" py-4">{dateline}</td>
         {req ? (
-          <td className="px-6 py-4">
+          <td className=" py-4">
             <button
               onClick={() => handleRequestDelete(_id)}
               className="btn btn-sm md:btn-md btn-error px-8"

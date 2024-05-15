@@ -58,13 +58,12 @@ const CardBox = ({ details, reqType }) => {
             />
           </div>
           <div className="flex flex-col gap-1 pt-3">
-            <h1 className="text-xl">{postTitle}</h1>
+            <h1 className="text-2xl">{postTitle}</h1>
             <p className="text-md">{category}</p>
-            <p className="text-sm">{dateline}</p>
           </div>
         </div>
         <div className="flex justify-between items-center border-t-2 pt-4 mt-4">
-          <div className="badge badge-info py-4 px-5">Status</div>
+          <div className="badge badge-info py-4 px-5 font-semibold">{dateline}</div>
           <div className="flex gap-5">
             {reqType ? (
               <button

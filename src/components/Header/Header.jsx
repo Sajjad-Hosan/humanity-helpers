@@ -6,6 +6,7 @@ import logo from "/logo.png";
 import { Typewriter } from "react-simple-typewriter";
 import { useEffect, useState } from "react";
 import { setItem } from "localforage";
+import { Bounce } from "react-awesome-reveal";
 const Header = () => {
   const Themes = [
     "light",
@@ -69,22 +70,24 @@ const Header = () => {
     <div className="navbar md:px-9 pt-6">
       <div className="navbar-start">
         <div className="dropdown z-10">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </div>
+          <Bounce>
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+          </Bounce>
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-2"
@@ -93,7 +96,7 @@ const Header = () => {
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost md:text-xl animate__zoomIn">
-          <img className="w-9 h-9 object-cover" src={logo} alt="" />
+          <img className="w-8 h-8 object-cover" src={logo} alt="" />
           <Typewriter
             words={["Welcome To", "Humanity Platform"]}
             loop={5}
@@ -109,43 +112,49 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1 space-x-2">{navLinks}</ul>
       </div>
       <div className="navbar-end animate__zoomIn z-10">
-        <div className="dropdown mr-5 z-10">
-          <div tabIndex={0} role="button" className="btn btn-outline px-8">
-            Theme
-            <svg
-              width="12px"
-              height="12px"
-              className="h-2 w-2 fill-current inline-block"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 2048 2048"
+        <Bounce>
+          <div className="dropdown mr-5 z-10">
+            <div tabIndex={0} role="button" className="btn btn-outline px-8">
+              Theme
+              <svg
+                width="12px"
+                height="12px"
+                className="h-2 w-2 fill-current inline-block"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 2048 2048"
+              >
+                <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[1] p-2 shadow-2xl bg-base-100 rounded-box w-52 mt-3 space-x-2"
             >
-              <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
-            </svg>
+              {Themes.map((theme, i) => (
+                <li key={i} className="my-2">
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    onChange={handleThemeName}
+                    className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                    aria-label={theme}
+                    value={theme}
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul
-            tabIndex={0}
-            className="dropdown-content z-[1] p-2 shadow-2xl bg-base-100 rounded-box w-52 mt-3 space-x-2"
-          >
-            {Themes.map((theme, i) => (
-              <li key={i} className="my-2">
-                <input
-                  type="radio"
-                  name="theme-dropdown"
-                  onChange={handleThemeName}
-                  className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                  aria-label={theme}
-                  value={theme}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
+        </Bounce>
         {user ? (
-          <ProfileNav />
+          <Bounce>
+            <ProfileNav />
+          </Bounce>
         ) : (
-          <Link to="/login" className="btn btn-neutral px-8">
-            <FaUser /> Login
-          </Link>
+          <Bounce>
+            <Link to="/login" className="btn btn-neutral px-8">
+              <FaUser /> Login
+            </Link>
+          </Bounce>
         )}
       </div>
     </div>

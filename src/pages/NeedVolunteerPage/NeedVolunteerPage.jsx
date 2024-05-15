@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import useAuth from "../../hooks/useAuth";
 import AddVolunteer from "../../components/AddVolunteer/AddVolunteer";
+import { Bounce } from "react-awesome-reveal";
 
 const NeedVolunteerPage = () => {
   const loaderCount = useLoaderData();
@@ -29,29 +30,37 @@ const NeedVolunteerPage = () => {
         <title>Humanity || Need Volunteer Page</title>
       </Helmet>
       <SearchBox />
-      <AddVolunteer/>
+      <AddVolunteer />
       <div className="flex flex-col gap-5 px-10 py-6">
         <div className="flex justify-between items-center">
           <h1 className="text-lg md:text-3xl">Need Volunteer</h1>
           <label className="flex gap-8">
-            <button
-              onClick={() => document.getElementById("add_box").showModal()}
-              className="btn btn-outline"
-            >
-              <FaPlus /> Add Volunteer
-            </button>
-            <button
-              onClick={() => document.getElementById("search_box").showModal()}
-              className="btn btn-neutral text-info px-6"
-            >
-              <FaMagnifyingGlass /> Search
-            </button>
+            <Bounce>
+              <button
+                onClick={() => document.getElementById("add_box").showModal()}
+                className="btn btn-outline"
+              >
+                <FaPlus /> Add Volunteer
+              </button>
+            </Bounce>
+            <Bounce>
+              <button
+                onClick={() =>
+                  document.getElementById("search_box").showModal()
+                }
+                className="btn btn-neutral text-info px-6"
+              >
+                <FaMagnifyingGlass /> Search
+              </button>
+            </Bounce>
           </label>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-4">
-          {items.map((item, i) => (
-            <VolunteerCard key={i} post={item} />
-          ))}
+          <Bounce>
+            {items.map((item, i) => (
+              <VolunteerCard key={i} post={item} />
+            ))}
+          </Bounce>
         </div>
         <div className="join mx-auto mt-8">
           <button
