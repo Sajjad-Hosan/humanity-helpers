@@ -6,7 +6,7 @@ const NeedNowSection = ({ loaderDatas }) => {
   const volunteerPosts = loaderDatas.slice(0, 6);
   return (
     <div className="flex flex-col gap-4 mt-28 text-center pb-4">
-      <h1 className="text-4xl">Volunteer Need Now</h1>
+      <h1 className="text-4xl mb-10">Volunteer Need Now</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10 mb-3">
         {volunteerPosts.map((post) => (
           <VolunteerCard key={post._id} post={post} />

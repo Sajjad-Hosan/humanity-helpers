@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Wade Warren",
+    "status": "Lead Volunteer",
+    "img": "https://goodheart.sva.la-studioweb.com/wp-content/uploads/2024/01/greenpeace-m1-s9-team-a.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Kristin Watson",
+    "status": "Lead Volunteer",
+    "img": "https://goodheart.sva.la-studioweb.com/wp-content/uploads/2024/01/greenpeace-m1-s9-team-b.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Bessie Cooper",
+    "status": "Lead Volunteer",
+    "img": "https://goodheart.sva.la-studioweb.com/wp-content/uploads/2024/01/greenpeace-m1-s9-team-c.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Arlene",
+    "status": "Lead Volunteer",
+    "img": "https://goodheart.sva.la-studioweb.com/wp-content/uploads/2024/01/greenpeace-m1-s9-team-d.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Arlene McCoy",
+    "status": "Lead Volunteer",
+    "img": "https://goodheart.sva.la-studioweb.com/wp-content/uploads/2024/01/greenpeace-m1-s9-team-e.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Wade Warren",
+    "status": "Lead Volunteer",
+    "img": "https://goodheart.sva.la-studioweb.com/wp-content/uploads/2024/01/greenpeace-m1-s9-team-f.jpg"
+  }
+]

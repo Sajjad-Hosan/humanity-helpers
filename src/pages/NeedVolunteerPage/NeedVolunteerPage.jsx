@@ -31,9 +31,6 @@ const NeedVolunteerPage = () => {
       <SearchBox />
       <AddVolunteer/>
       <div className="flex flex-col gap-5 px-10 py-6">
-        <Helmet>
-          <title>Need Volunteer Page | HumanityPlatform</title>
-        </Helmet>
         <div className="flex justify-between items-center">
           <h1 className="text-lg md:text-3xl">Need Volunteer</h1>
           <label className="flex gap-8">

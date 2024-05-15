@@ -7,6 +7,9 @@ export default {
     "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
   theme: {
+    fontFamilly: {
+      openSans: ["Open Sans", "sans-serif"],
+    },
     extend: {},
     colors: {
       transparent: "transparent",

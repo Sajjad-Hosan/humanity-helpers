@@ -42,7 +42,6 @@ const MyPosts = () => {
       .then((res) => {
         setUserRequestData(res.data);
       })
-      .catch((e) => toast.error(e.message));
   }, []);
   const handleTableType = (boo) => {
     setTableType(boo);
@@ -118,7 +117,7 @@ const MyPosts = () => {
         </div>
         <div className={`text-4xl ${tab === 0 ? "" : "hidden"} w-full`}>
           {userVolunteerData.length > 0 ? (
-            <div className="relative overflow-hidden mt-8">
+            <div className="relative overflow-y-hidden mt-8">
               {tableType ? (
                 <TableContainer req={false} myLists={userVolunteerData} />
               ) : (

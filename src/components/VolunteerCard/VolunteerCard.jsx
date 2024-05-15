@@ -6,8 +6,7 @@ const VolunteerCard = ({ post }) => {
   const {_id,thumbnail,shortDescription,postTitle,category,volunteerNeed,} = post;
   return (
     <div>
-
-      <div className="bg-white border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-5 h-[610px]">
+      <div className="bg-white border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 p-5 h-[610px] flex flex-col justify-between">
        <div className="w-full h-[240px]">
        <img
           className="rounded-xl w-full h-full object-cover"

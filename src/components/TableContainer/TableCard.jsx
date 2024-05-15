@@ -64,7 +64,7 @@ const TableCard = ({ details, req }) => {
           <td className="px-6 py-4">
             <button
               onClick={() => handleRequestDelete(_id)}
-              className="btn btn-error px-8"
+              className="btn btn-sm md:btn-md btn-error px-8"
             >
               Cancel
             </button>
@@ -73,14 +73,14 @@ const TableCard = ({ details, req }) => {
           <td className="py-4 flex gap-5">
             <button
               onClick={() => PostDelete(_id)}
-              className="btn btn-error flex tooltip"
+              className="btn btn-sm md:btn-md btn-error flex tooltip"
               data-tip="Delete"
             >
               <FaTrash />
             </button>
             <Link
               to={`/volunteer_update_post/${_id}`}
-              className="btn btn-outline flex tooltip"
+              className="btn btn-sm md:btn-md btn-outline flex tooltip"
               data-tip="Update"
             >
               <FiEdit />
