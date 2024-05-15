@@ -24,7 +24,7 @@ const TableContainer = ({ myLists,req }) => {
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody> 
           {myLists.map((list) => (
             <TableCard req={req}  key={list._id} details={list} />
           ))}

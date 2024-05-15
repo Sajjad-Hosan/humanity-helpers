@@ -24,7 +24,7 @@ const VolunteerDetailsPage = () => {
         <title>Humanity || Volunteer Details Page</title>
       </Helmet>
       <BeVolunteer data={loaderData} />
-      <div className="px-5 md:px-10 mt-10 relative">
+      <div className="px-5 md:px-10 mt-10 relative mb-56 md:mb-8">
         <button
           onClick={() => navigate(-1)}
           className="btn btn-ghost mb-10 px-8"
@@ -36,7 +36,7 @@ const VolunteerDetailsPage = () => {
         </div>
         <div className="card p-8 bg-base-100 md:shadow-lg md:w-[1000px] md:h-[380px] absolute md:bottom-[8rem] md:left-20">
           <div className="flex justify-between">
-            <h1 className="text-3xl mb-4">Post Details</h1>
+            <h1 className="text-lg md:text-3xl mb-4">Post Details</h1>
             <div className="flex gap-5">
               <div className="badge badge-info px-5 py-4 font-semibold capitalize">
                 {category}
@@ -47,7 +47,7 @@ const VolunteerDetailsPage = () => {
               </div>
             </div>
           </div>
-          <h1 className="text-4xl">{postTitle}</h1>
+          <h1 className="text-lg md:text-4xl">{postTitle}</h1>
           <p className="text-md mt-2">
             <span className="font-bold">location:</span> {location}
           </p>
@@ -65,7 +65,7 @@ const VolunteerDetailsPage = () => {
                 onClick={() =>
                   document.getElementById("be_volunteer").showModal()
                 }
-                className="btn btn-neutral text-info px-10 w-1/4"
+                className="btn btn-neutral text-info px-10 md:w-1/4"
               >
                 <IoPersonAddOutline /> Be a Volunteer
               </button>

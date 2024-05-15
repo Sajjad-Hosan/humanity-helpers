@@ -66,7 +66,7 @@ const Header = () => {
     </>
   );
   return (
-    <div className="navbar px-9 pt-6">
+    <div className="navbar md:px-9 pt-6">
       <div className="navbar-start">
         <div className="dropdown z-10">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -92,7 +92,7 @@ const Header = () => {
             {navLinks}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl animate__zoomIn">
+        <Link to="/" className="btn btn-ghost md:text-xl animate__zoomIn">
           <img className="w-9 h-9 object-cover" src={logo} alt="" />
           <Typewriter
             words={["Welcome To", "Humanity Platform"]}

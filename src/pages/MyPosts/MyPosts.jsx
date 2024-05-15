@@ -116,7 +116,7 @@ const MyPosts = () => {
             </li>
           </ul>
         </div>
-        <div className={`text-4xl ${tab === 0 ? "" : "hidden"}`}>
+        <div className={`text-4xl ${tab === 0 ? "" : "hidden"} w-full`}>
           {userVolunteerData.length > 0 ? (
             <div className="relative overflow-hidden mt-8">
               {tableType ? (
