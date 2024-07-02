@@ -4,7 +4,7 @@ A Platform where You can Find What Good Work You Want To Do For People.
 
 ## Demo
 
-- Live Link - https://humanity-helpers-server.vercel.app/
+- Live Link - https://humanityhelpersplatform.web.app/
 
 ## Features
 - authentication
