@@ -1,10 +1,10 @@
-# AmiciAdoptHub
+# humanity-helpers
 
 A Platform where You can Find What Good Work You Want To Do For People.
 
 ## Demo
 
-- Live Link - https://amiciadopthub.web.app
+- Live Link - https://humanity-helpers-server.vercel.app/
 
 ## Features
 - authentication
