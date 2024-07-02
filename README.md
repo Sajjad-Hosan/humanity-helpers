@@ -32,6 +32,26 @@ A Platform where You can Find What Good Work You Want To Do For People.
 - sweetalert2
 - swiper
 
+
+## Run Local to your Pc
+
+Install my-project with npm
+#### Clone repo
+```bash
+  git clone https://github.com/Sajjad-Hosan/humanity-helpers.git
+```
+#### Go to the folder
+```bash
+  cd humanity-helpers
+```
+#### Install all npm package
+```bash
+  npm install
+```
+#### Run dev
+```bash
+  npm run dev
+```
 ## Support
 
 For support, email s4jj4dh034n@gmail.com or join our Slack channel.
