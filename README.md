@@ -1,6 +1,10 @@
-# humanity-helpers
+# Humanity-helpers
 
 A Platform where You can Find What Good Work You Want To Do For People.
+
+## Screenshot
+![App Screenshot](https://i.ibb.co/98bP6hD/humanity.png)
+
 
 ## Demo
 
